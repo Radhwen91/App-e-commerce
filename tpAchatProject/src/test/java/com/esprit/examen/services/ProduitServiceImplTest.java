@@ -15,7 +15,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.esprit.examen.entities.Produit;
 import com.esprit.examen.entities.Stock;
-
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -30,7 +29,6 @@ public class ProduitServiceImplTest {
 	
 	@Test
 	public void testAddProduit() throws ParseException {
-
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date dateCreation = dateFormat.parse("30/09/2022");
 		Produit p = new Produit(null, "ChocoTom", "biscuit", 0, dateCreation, null, null, null, null);
@@ -39,7 +37,6 @@ public class ProduitServiceImplTest {
 		assertNotNull(produit.getIdProduit());
 		assertTrue(produit.getCodeProduit().length() > 0);
 		produitService.deleteProduit(produit.getIdProduit());
-
 	}
 	
 	@Test
@@ -64,7 +61,6 @@ public class ProduitServiceImplTest {
 		Produit produit = produitService.addProduit(p);
 		assertEquals(expected + 1, produitService.retrieveAllProduits().size());
 		produitService.deleteProduit(produit.getIdProduit());
-
 	}
 	
 	@Test
@@ -80,8 +76,8 @@ public class ProduitServiceImplTest {
 		assertNotNull(ProduitUpdated.getIdProduit());
 		assertSame("1/10/2022", ProduitUpdated.getDateDerniereModification());
 		produitService.deleteProduit(produit.getIdProduit());
-		
 	} 
+	
 	@Test
 	public void testAssignProduitToStock() throws ParseException {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -96,9 +92,5 @@ public class ProduitServiceImplTest {
 		assertNotNull(produit.getStock());
 		stockService.deleteStock(savedStock.getIdStock());
 		produitService.deleteProduit(produit.getIdProduit());
-		
 	}
-	
-
-
 }
