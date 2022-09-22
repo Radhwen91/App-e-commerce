@@ -1,4 +1,4 @@
-package com.esprit.examen.services;
+package com.esprit.examen;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -24,6 +24,7 @@ import com.esprit.examen.entities.Facture;
 import com.esprit.examen.entities.Fournisseur;
 import com.esprit.examen.entities.Produit;
 import com.esprit.examen.entities.SecteurActivite;
+import com.esprit.examen.services.IFournisseurService;
 
 import lombok.extern.slf4j.Slf4j;
 

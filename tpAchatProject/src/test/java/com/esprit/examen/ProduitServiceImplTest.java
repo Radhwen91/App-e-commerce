@@ -1,4 +1,4 @@
-package com.esprit.examen.services;
+package com.esprit.examen;
 
 import static org.junit.Assert.*;
 
@@ -15,6 +15,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.esprit.examen.entities.Produit;
 import com.esprit.examen.entities.Stock;
+import com.esprit.examen.services.IProduitService;
+import com.esprit.examen.services.IStockService;
+
 import lombok.extern.slf4j.Slf4j;
 
 
