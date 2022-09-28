@@ -36,6 +36,7 @@ public class ProduitServiceImpl implements IProduitService {
 	@Transactional
 	public Produit addProduit(Produit p) {
 		produitRepository.save(p);
+		log.info(" Produit ajouté: " + p);
 		return p;
 	}
 
@@ -43,12 +44,25 @@ public class ProduitServiceImpl implements IProduitService {
 
 	@Override
 	public void deleteProduit(Long produitId) {
+		try {
 		produitRepository.deleteById(produitId);
+		log.info(" Produit a ete supprimée ");
+		}
+		catch(Exception e) {
+			log.error(e.getMessage());
+		}
+		
 	}
 
 	@Override
 	public Produit updateProduit(Produit p) {
-		return produitRepository.save(p);
+		try {
+		 produitRepository.save(p);
+		log.info(" Produit a ete modifié ");
+		}catch(Exception e) {
+			log.error(e.getMessage());
+		}
+		return p;
 	}
 
 	@Override
@@ -62,9 +76,14 @@ public class ProduitServiceImpl implements IProduitService {
 	public void assignProduitToStock(Long idProduit, Long idStock) {
 		Produit produit = produitRepository.findById(idProduit).orElse(null);
 		Stock stock = stockRepository.findById(idStock).orElse(null);
+		try {
 		produit.setStock(stock);
+		log.info(" Produit et tck a ete assignée ");
 		produitRepository.save(produit);
-
+		log.info(" Produit a ete enregistrée ");
+		}catch(Exception e) {
+			log.error(e.getMessage());
+		}
 	}
 
 
