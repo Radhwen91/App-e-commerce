@@ -12,8 +12,8 @@ pipeline {
              stage('Checkout GIT') {
             steps {
               echo 'cloning project'
-                 git branch: 'main',
-                 url : 'https://github.com/faresmoalla/Projet-Devops' ;
+                 git branch: 'fares',
+                 url : 'https://github.com/Radhwen91/tpAchatProject' ;
                 
                     }
                 }
