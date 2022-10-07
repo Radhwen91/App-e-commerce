@@ -1,4 +1,4 @@
 FROM openjdk:8-jdk-alpine
 EXPOSE 8089
-ADD target/users-mysql.jar users-mysql.jar 
-ENTRYPOINT ["java","-jar","/users-mysql.jar"]
+ADD target/tpAchatProject-1.0.jar tpAchatProject-1.0.jar 
+ENTRYPOINT ["java","-jar","/tpAchatProject-1.0.jar"]
