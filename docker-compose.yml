@@ -14,7 +14,7 @@ services:
       - db:/var/lib/mysql
   app:
     depends_on:
-      - mysqldb
+      - mysql
     build: 
         context : .
         dockerfile : ./Dockerfile
