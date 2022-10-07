@@ -15,7 +15,8 @@ services:
   app:
     depends_on:
       - mysqldb
-    build: ./target/tpAchatProject-1.0
+    build: ./tpAchatProject
+    dockerfile: Dockerfile
     restart: on-failure
     env_file: ./.env
     ports:
