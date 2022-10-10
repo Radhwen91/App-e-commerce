@@ -31,7 +31,7 @@ public class ProduitServiceImplTest {
 	public void testAddProduit() throws ParseException {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date dateCreation = dateFormat.parse("30/09/2022");
-		Produit p = new Produit(null, "ChocoTom", "biscuit", 0, dateCreation, null, null, null, null);
+		Produit p = new Produit(null, "ChocoTom1", "biscuit", 0, dateCreation, null, null, null, null);
 		Produit produit = produitService.addProduit(p);
 		System.out.print("Produit: "+produit);
 		assertNotNull(produit.getIdProduit());
@@ -44,7 +44,7 @@ public class ProduitServiceImplTest {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date dateCreation = dateFormat.parse("30/09/2022");
 		Date dateDerniereModification = dateFormat.parse("1/10/2022");
-		Produit p = new Produit(null, "ChocoTom", "biscuit", 0, dateCreation, dateDerniereModification, null, null, null);
+		Produit p = new Produit(null, "Oreo", "biscuit", 0, dateCreation, dateDerniereModification, null, null, null);
 		Produit produit = produitService.addProduit(p);
 		produitService.deleteProduit(produit.getIdProduit());
 		assertNull(produitService.retrieveProduit(produit.getIdProduit()));
@@ -57,7 +57,7 @@ public class ProduitServiceImplTest {
 		Date dateDerniereModification = dateFormat.parse("1/10/2022");
 		List<Produit> produits = produitService.retrieveAllProduits();
 		int expected = produits.size();
-		Produit p = new Produit(null, "ChocoTom", "biscuit", 0, dateCreation, dateDerniereModification, null, null, null);
+		Produit p = new Produit(null, "Forree", "biscuit", 0, dateCreation, dateDerniereModification, null, null, null);
 		Produit produit = produitService.addProduit(p);
 		assertEquals(expected + 1, produitService.retrieveAllProduits().size());
 		produitService.deleteProduit(produit.getIdProduit());
@@ -69,28 +69,32 @@ public class ProduitServiceImplTest {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date dateCreation = dateFormat.parse("30/09/2022");
 		Date dateDerniereModification = dateFormat.parse("1/10/2022");
-		Produit p = new Produit(null, "ChocoTom", "biscuit", 0, dateCreation,null, null, null, null);
+		Produit p = new Produit(null, "sablito", "biscuit", 0, dateCreation,null, null, null, null);
 		Produit produit = produitService.addProduit(p);
 		produit.setDateDerniereModification(dateDerniereModification);
 		Produit ProduitUpdated = produitService.updateProduit(produit);
 		assertNotNull(ProduitUpdated.getIdProduit());
-		assertSame("1/10/2022", ProduitUpdated.getDateDerniereModification());
+		assertSame(dateDerniereModification, ProduitUpdated.getDateDerniereModification());
 		produitService.deleteProduit(produit.getIdProduit());
 	} 
 	
 	@Test
 	public void testAssignProduitToStock() throws ParseException {
+		System.out.print("///////////////////////////////////////// ");
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date dateCreation = dateFormat.parse("30/09/2022");
 		Stock s = new Stock("stock test",10,100);
 		Stock savedStock= stockService.addStock(s);
-		Produit p = new Produit(null, "ChocoTom", "biscuit", 0, dateCreation, null, null, null, null);
+		Produit p = new Produit(null, "prince", "biscuit", 0, dateCreation, null, null, null, null);
 		Produit produit = produitService.addProduit(p);
 		System.out.print("Stock: "+savedStock);
 		System.out.print("Produit: "+produit);
 		produitService.assignProduitToStock(produit.getIdProduit(), savedStock.getIdStock());
-		assertNotNull(produit.getStock());
-		stockService.deleteStock(savedStock.getIdStock());
+		Produit p1 =produitService.retrieveProduit(produit.getIdProduit());
+		assertNotNull(p1.getStock().getIdStock());
+		System.out.print("///////////////////////////////////////// ");
 		produitService.deleteProduit(produit.getIdProduit());
+		stockService.deleteStock(savedStock.getIdStock());
+		
 	}
 }
