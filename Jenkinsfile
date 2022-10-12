@@ -47,8 +47,24 @@ pipeline {
 			}
 			}
               
+   stage('Run Unit Tests') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                script{
+                    timestamps {
+                        sh 'mvn test'
+                            }
+                    }  } }}
               
-           
+        stage {
+     
+    
+    post {
+        always {
+            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+        }
+    }
+         }   
         
 
  stage('Building our image') { 
