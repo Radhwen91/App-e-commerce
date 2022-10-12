@@ -1,6 +1,9 @@
 pipeline {
        environment { 
         EMAIL_RECIPIENTS = "fares.moalla@esprit.tn"
+         registry = "moallafares/tpAchatProject" 
+        registryCredential = 'dockerHub' 
+        dockerImage = ''
        
     
     }
@@ -46,13 +49,29 @@ pipeline {
                     timestamps {
                         sh 'mvn test'
                             }
-                    }
+                    }  } }}
+              
+           
+        
+
+ stage('Building our image') { 
+            steps { 
+                script { 
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
                 }
-            }
+            } 
         }
 
 
-
+  stage('Deploy our image') { 
+            steps { 
+                script { 
+                    docker.withRegistry( '', registryCredential ) { 
+                        dockerImage.push() 
+                    }
+                } 
+            }
+        } 
 
             
        
