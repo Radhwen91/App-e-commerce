@@ -12,9 +12,13 @@ pipeline {
      
              stage('Checkout GIT') {
             steps {
-              echo 'cloning project'
-                 git branch: 'fares',
-                 url : 'https://github.com/Radhwen91/tpAchatProject' ;
+             script {
+             checkout([$class: 'GitSCM',
+         branches: [[name: '*/fares']],
+         userRemoteConfigs: [[url: 'https://github.com/Radhwen91/tpAchatProject.git']]])
+             
+             }
+             
                 
                     }
                 }
@@ -46,11 +50,7 @@ pipeline {
                 }
             }
         }
-stage("Publish to Nexus"){
-			steps{
-			
-			}
-			}	
+
 
 
 
