@@ -9,11 +9,7 @@ pipeline {
     }
 
     agent any
-    
-     tools {
-       
-        dockerTool 'docker'
-    }
+
     
     
     
