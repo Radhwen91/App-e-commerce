@@ -1,7 +1,7 @@
 pipeline {
        environment { 
         EMAIL_RECIPIENTS = "fares.moalla@esprit.tn"
-         registry = "moallafares/tpAchatProject" 
+         registry = "moallafares/tpachatproject" 
         registryCredential = 'dockerHub' 
         dockerImage = ''
        
