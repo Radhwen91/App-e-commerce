@@ -46,14 +46,7 @@ pipeline {
 			sh """ mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar"""
 			}
 			}
-                  stage('Run Unit Tests') {
-            steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                script{
-                    timestamps {
-                        sh 'mvn test'
-                            }
-                    }  } }}
+              
               
            
         
@@ -83,6 +76,8 @@ pipeline {
             }
         }
        
+   
+    
        
        
        
