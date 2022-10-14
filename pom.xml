@@ -13,6 +13,14 @@
 	<version>1.0-SNAPSHOT</version>
 	<name>tpAchatProject</name>
 	<description>tpAchatProject</description>
+	
+	<distributionManagement>
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+
+		</distributionManagement>
 	<properties>
 		<java.version>1.8</java.version>
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
@@ -91,6 +99,7 @@
     <version>3.1.0</version>
 </plugin> 
 		</plugins>
+		
 	</build>
 
 </project>
