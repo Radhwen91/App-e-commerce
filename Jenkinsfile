@@ -1,6 +1,6 @@
 pipeline {
        environment { 
-        EMAIL_RECIPIENTS = "fares.moalla@esprit.tn"
+       
          registry = "moallafares/tpachatproject" 
         registryCredential = 'dockerhub' 
         dockerImage = ''
@@ -100,11 +100,9 @@ pipeline {
        
     } }
     
-        post {
+         post {
         always {
             emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
         }
-  
     }
-    
     
