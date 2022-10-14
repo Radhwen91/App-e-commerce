@@ -63,11 +63,7 @@ pipeline {
                             }
                     }  } }}
               
-  stage("Deploy on nexus"){
-			steps{
-			sh """ mvn deploy"""
-			}
-			}
+
 
  stage('Building our image') { 
             steps { 
