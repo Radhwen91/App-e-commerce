@@ -46,6 +46,11 @@ pipeline {
             }
 
 
+	stage("Deploy on nexus"){
+			steps{
+			sh """ mvn deploy"""
+			}
+			}
 
 		stage("Code Quality with SonarQube"){
 			steps{
