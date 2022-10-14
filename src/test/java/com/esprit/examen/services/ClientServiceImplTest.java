@@ -1,4 +1,4 @@
-/*package com.esprit.examen.services;
+package com.esprit.examen.services;
 
 import static org.junit.Assert.*;
 
@@ -36,7 +36,8 @@ public class ClientServiceImplTest {
 		Client c = new Client("Salhi", "Ahmed", dateNaissance, "ahmed.salhi@esprit.tn", "pwd", Profession.Cadre,
 				CategorieClient.Ordinaire);
 		Client client = clientService.addClient(c);
-		System.out.print("client "+client);
+		//System.out.print("client "+client);
+		log.info("client"+client);
 		assertNotNull(client.getIdClient());
 		assertNotNull(client.getCategorieClient());
 		assertTrue(client.getNom().length() > 0);
@@ -65,6 +66,7 @@ public class ClientServiceImplTest {
 		Client client = clientService.addClient(c);
 		assertEquals(expected + 1, clientService.retrieveAllClients().size());
 		clientService.deleteClient(client.getIdClient());
+		log.info("la nouvelle liste clients"+clients);
 
 	}
 	@Test
@@ -73,7 +75,7 @@ public class ClientServiceImplTest {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date startDate = dateFormat.parse("28/09/2000");
 		Date endDate = dateFormat.parse("30/09/2005");
-		List<Client> clients = clientService.getClientsByDateNaissance(startDate, endDate);
+		List<Client> clients = clientService.getClientByDateNaissance(startDate, endDate);
 		log.info(" count" + clients.size());
 		for (Client client : clients) {
 			log.info(" client : " + client.getNom()+ " né le "+client.getDateNaissance());
@@ -82,4 +84,3 @@ public class ClientServiceImplTest {
 	}
 
 }
-*/
