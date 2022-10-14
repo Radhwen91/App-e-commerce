@@ -10,18 +10,11 @@
 	</parent>
 	<groupId>com.esprit.examen</groupId>
 	<artifactId>tpAchatProject</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>tpAchatProject</name>
 	<description>tpAchatProject</description>
 	
-	<distributionManagement>
-		<snapshotRepository>
-			<id>nexus-snapshots</id>
 
-			<url>http://192.168.100.158:8081/nexus/content/repositories/snapshots/</url>
-		</snapshotRepository>
-
-		</distributionManagement>
 	<properties>
 		<java.version>1.8</java.version>
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
@@ -102,5 +95,10 @@
 		</plugins>
 		
 	</build>
-
+<distributionManagement>
+	<repository>
+	<id>deploymentRepo</id>
+	<url>http://192.168.1.9:8081/#browse/browse:maven-releases</url>
+	</repository>
+	</distributionManagement>
 </project>
