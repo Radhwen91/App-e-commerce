@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.esprit.examen</groupId>
 	<artifactId>tpAchatProject</artifactId>
-	<version>1.0</version>
+	<version>1.0-REALEASES</version>
 	<name>tpAchatProject</name>
 	<description>tpAchatProject</description>
 	<properties>
@@ -70,15 +70,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
-		
 	</dependencies>
-	<distributionManagement>
-	<repository>
-	<id>deploymentRepo</id>
-	<name>Nexus Repository</name>
-	<url>http://192.168.1.8:8081/repository/maven-snapshots/</url>
-	</repository>
-	</distributionManagement>
 
 	<build>
 		<plugins>
@@ -86,12 +78,19 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-resources-plugin</artifactId>
-    <version>3.1.0</version>
-</plugin> 
+			  <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-resources-plugin</artifactId>
+                  <version>3.1.0</version>
+            </plugin>
 		</plugins>
+	
 	</build>
-
+	<distributionManagement>
+	<repository>
+	<id>deploymentRepo</id>
+	<name>Nexus Repository</name>
+	<url>http://192.168.1.13:8081/repository/maven-releases</url>
+	</repository>
+	</distributionManagement>
 </project>
