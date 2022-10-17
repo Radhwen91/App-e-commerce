@@ -51,7 +51,7 @@ public class Client implements Serializable {
 	@Enumerated(EnumType.STRING)
 	 CategorieClient categorieClient;
 	@OneToMany(cascade = CascadeType.ALL)
-	 List<Facture> Facture;
+	 private List<Facture> Facture;
 
 
 
