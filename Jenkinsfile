@@ -10,7 +10,7 @@ pipeline {
         NEXUS_URL= "192.168.100.158:8081"
         NEXUS_REPOSITORY = "nexus-repo-devops"
         NEXUS_CREDENTIALS_ID = "nexus-user-credentials"
-       
+       credentialsId='0539a6a0-6f10-49aa-ada5-c0e509b3fdb8';
     
     }
 
