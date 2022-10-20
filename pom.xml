@@ -85,5 +85,13 @@
             </plugin>
 		</plugins>
 	</build>
-
+	<distributionManagement>
+		<snapshotRepository>
+      <uniqueVersion>true</uniqueVersion>
+      <id>propSnap</id>
+      <name>Propellors Snapshots</name>
+      <url>http://192.168.1.72:8081/repository/maven-snapshots/</url>
+      <layout>legacy</layout>
+    </snapshotRepository>
+	</distributionManagement>
 </project>
