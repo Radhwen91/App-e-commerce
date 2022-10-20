@@ -15,7 +15,7 @@ services:
   app:
     depends_on:
       - mysqldb
-    build: /home/tpAchatProject
+    build: ./home/tpAchatProject
     restart: on-failure
     env_file: ./.env
     ports:
