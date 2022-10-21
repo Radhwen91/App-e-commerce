@@ -44,7 +44,7 @@ pipeline {
                     } }
                 }
             }
-stage("Nexus"){
+/*stage("Nexus"){
 			steps{
 			sh """ mvn deploy"""
 			}
@@ -56,20 +56,20 @@ stage("Nexus"){
 			steps{
 			sh """ mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar"""
 			}
-			}
+			}*/
               
-   stage('Run Unit Tests') {
+   /*stage('Run Unit Tests') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 script{
                     timestamps {
                         sh 'mvn test'
                             }
-                    }  } }}
+                    }  } }}*/
               
        
    
-stage('Building our image') { 
+/*stage('Building our image') { 
             steps { 
                 script { 
                     dockerImage = docker.build registry + ":$BUILD_NUMBER" 
@@ -86,6 +86,11 @@ stage('Building our image') {
                         dockerImage.push() 
                     }
                 } 
+            }
+        }*/
+ 	stage('Start container') { 
+            steps { 
+                sh "docker-compose" 
             }
         } 
 
