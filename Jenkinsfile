@@ -90,7 +90,7 @@ pipeline {
         }*/
  	stage('Start container') { 
             steps { 
-                sh "docker-compose" 
+                sh "docker-compose up" 
             }
         } 
 
