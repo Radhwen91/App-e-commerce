@@ -1,8 +1,8 @@
-version: "3.8"
+version: "3.3"
 
 services:
   mysqldb:
-    image: mysql:5.7
+    image: mysql
     restart: unless-stopped
     env_file: ./.env
     environment:
@@ -15,7 +15,7 @@ services:
   app:
     depends_on:
       - mysqldb
-    build: ./spring-app
+    build: /home/tpAchatProject
     restart: on-failure
     env_file: ./.env
     ports:
