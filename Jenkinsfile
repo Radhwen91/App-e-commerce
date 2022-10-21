@@ -58,14 +58,14 @@ pipeline {
 			}
 			}*/
               
-   /*stage('Run Unit Tests') {
+   stage('Run Unit Tests') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 script{
                     timestamps {
                         sh 'mvn test'
                             }
-                    }  } }}*/
+                    }  } }}
               
        
    
@@ -75,11 +75,11 @@ pipeline {
                     dockerImage = docker.build registry + ":$BUILD_NUMBER" 
                 }
             } 
-        }
+        }*/
 	
               
 
-  stage('Deploy our image') { 
+ /* stage('Deploy our image') { 
             steps { 
                 script { 
                     docker.withRegistry( '', registryCredential ) { 
