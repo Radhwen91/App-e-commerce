@@ -3,9 +3,14 @@ package com.esprit.examen.services;
 import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.esprit.examen.entities.CategorieProduit;
+
+import com.esprit.examen.converter.ProduitConverter;
+import com.esprit.examen.dto.ProduitDTO;
+
 import com.esprit.examen.entities.Produit;
 import com.esprit.examen.entities.Stock;
 import com.esprit.examen.repositories.CategorieProduitRepository;
@@ -23,6 +28,11 @@ public class ProduitServiceImpl implements IProduitService {
 	StockRepository stockRepository;
 	@Autowired
 	CategorieProduitRepository categorieProduitRepository;
+	@Autowired
+    ModelMapper modelMapper;
+	@Autowired
+	ProduitConverter produitConverter;
+	
 
 	@Override
 	public List<Produit> retrieveAllProduits() {
@@ -34,10 +44,11 @@ public class ProduitServiceImpl implements IProduitService {
 	}
 
 	@Transactional
-	public Produit addProduit(Produit p) {
-		produitRepository.save(p);
-		log.info(" Produit ajouté: " + p);
-		return p;
+	public ProduitDTO addProduit(ProduitDTO p) {
+		Produit produit = produitConverter.convertDtoToEntity(p);
+		produitRepository.save(produit);
+		log.info(" Produit ajouté: " + produit);
+		return produitConverter.convertEntityToDto(produit);
 	}
 
 	
@@ -55,21 +66,20 @@ public class ProduitServiceImpl implements IProduitService {
 	}
 
 	@Override
-	public Produit updateProduit(Produit p) {
-		try {
-		 produitRepository.save(p);
+	public ProduitDTO updateProduit(ProduitDTO p) {
+		
+		Produit produit = produitConverter.convertDtoToEntity(p);
+		 produitRepository.save(produit);
 		log.info(" Produit a ete modifié ");
-		}catch(Exception e) {
-			log.error(e.getMessage());
-		}
-		return p;
+		
+		return produitConverter.convertEntityToDto(produit);
 	}
 
 	@Override
-	public Produit retrieveProduit(Long produitId) {
+	public ProduitDTO retrieveProduit(Long produitId) {
 		Produit produit = produitRepository.findById(produitId).orElse(null);
 		log.info("produit :" + produit);
-		return produit;
+		return produitConverter.convertEntityToDto(produit);
 	}
 
 	@Override
@@ -77,10 +87,12 @@ public class ProduitServiceImpl implements IProduitService {
 		Produit produit = produitRepository.findById(idProduit).orElse(null);
 		Stock stock = stockRepository.findById(idStock).orElse(null);
 		try {
+			if(produit!=null) {
 		produit.setStock(stock);
 		log.info(" Produit et tck a ete assignée ");
 		produitRepository.save(produit);
 		log.info(" Produit a ete enregistrée ");
+			}
 		}catch(Exception e) {
 			log.error(e.getMessage());
 		}
