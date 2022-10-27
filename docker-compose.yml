@@ -7,6 +7,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
       - MYSQL_DATABASE=$MYSQLDB_DATABASE
+       - MYSQLDB_LOCAL_PORT_HOST= $MYSQLDB_LOCAL_PORT_HOST
     ports:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
 
@@ -26,6 +27,7 @@ services:
         "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
         "spring.jpa.hibernate.ddl-auto" : "update"
       }'
+     - MYSQLDB_LOCAL_PORT_HOST= mysql
     volumes:
       - .m2:/root/.m2
     stdin_open: true
