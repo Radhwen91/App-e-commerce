@@ -11,13 +11,13 @@ import com.esprit.examen.entities.FactureDTO;
 public class FactureConverter {
 	  public FactureDTO convertEntityToDto(Facture facutre) {
 	        ModelMapper modelMapper = new ModelMapper();
-	        FactureDTO factureDTO = modelMapper.map(facutre, FactureDTO.class);
-	        return factureDTO;
+	        return modelMapper.map(facutre, FactureDTO.class);
+	        
 	    }
 
 	    public Facture convertDtoToEntity(FactureDTO factureDTO) {
 	        ModelMapper modelMapper = new ModelMapper();
-	        Facture facture = modelMapper.map(factureDTO, Facture.class);
-	        return facture;
+	        return modelMapper.map(factureDTO, Facture.class);
+	       
 	    }
 }
