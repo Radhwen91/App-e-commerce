@@ -2,7 +2,7 @@ package com.esprit.examen.services;
 
 import java.util.Date;
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class ClientServiceImpl implements IClientService {
 	public List<Client> retrieveAllClients() {
 		// récuperer la date à l'instant t1
 		log.info("In method retrieveAllClients");
-		List<Client> clients = (List<Client>) clientRepository.findAll();
+		List<Client> clients = clientRepository.findAll();
 		for (Client client : clients) {
 			log.info(" client : " + client);
 		}
@@ -60,8 +60,8 @@ public class ClientServiceImpl implements IClientService {
 	public Client retrieveClient(Long id) {
 		log.info("In method retrieveClient");
 		clientRepository.findById(id);
-		Client s=clientRepository.findById(id).get();
-		return s;
+		Optional<Client> client = clientRepository.findById(id);
+		return client.isPresent() ? client.get() : null;
 	}
 
 	

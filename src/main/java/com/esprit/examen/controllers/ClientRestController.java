@@ -28,8 +28,7 @@ public class ClientRestController {
 	@GetMapping("/retrieve-all-clients")
 	@ResponseBody
 	public List<Client> getClients() {
-		List<Client> listClients = clientService.retrieveAllClients();
-		return listClients;
+		return clientService.retrieveAllClients();
 	}
 
 	// http://localhost:8089/SpringMVC/client/retrieve-client/8
@@ -43,8 +42,7 @@ public class ClientRestController {
 	@PostMapping("/add-client")
 	@ResponseBody
 	public Client addClient(@RequestBody Client c) {
-		Client client = clientService.addClient(c);
-		return client;
+		return clientService.addClient(c);
 	}
 
 	// http://localhost:8089/SpringMVC/client/remove-client/{client-id}
