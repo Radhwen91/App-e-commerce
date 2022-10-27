@@ -3,6 +3,7 @@ package com.esprit.examen.controllers;
 import java.util.Date;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,9 @@ public class FactureRestController {
 
     @Autowired
     IFactureService factureService;
-
+@Autowired
+private ModelMapper modelMapper;
+    
     // http://localhost:8089/SpringMVC/facture/retrieve-all-factures
     @GetMapping("/retrieve-all-factures")
     @ResponseBody

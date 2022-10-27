@@ -25,22 +25,28 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FactureDTO {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private Long idFacture;
+	
 	private float montantRemise;
+	
 	private float montantFacture;
+	/*
 	@Temporal(TemporalType.DATE)
 	private Date dateCreationFacture;
+	
 	@Temporal(TemporalType.DATE)
 	private Date dateDerniereModificationFacture;
+	
 	private Boolean archivee;
+	
 	@OneToMany(mappedBy = "facture")
 	private Set<DetailFacture> detailsFacture;
+	
     @ManyToOne
     @JsonIgnore
     private Fournisseur fournisseur;
     @OneToMany(mappedBy="facture")
     @JsonIgnore
-    private Set<Reglement> reglements;
+    private Set<Reglement> reglements;*/
 }
