@@ -43,4 +43,16 @@ public class FactureDTO {
     @OneToMany(mappedBy="facture")
     @JsonIgnore
     private Set<Reglement> reglements;
+    
+	public FactureDTO(float montantRemise, float montantFacture, Date dateCreationFacture,
+			Date dateDerniereModificationFacture, Boolean archivee) {
+		this.montantRemise = montantRemise;
+		this.montantFacture = montantFacture;
+		this.dateCreationFacture = dateCreationFacture;
+		this.dateDerniereModificationFacture = dateDerniereModificationFacture;
+		this.archivee = archivee;
+		
+	}
+    
+    
 }
