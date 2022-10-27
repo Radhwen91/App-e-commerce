@@ -1,6 +1,6 @@
 version: "3.3"
 services:
-  mysqldb:
+  mysql:
     image: mysql
     restart: unless-stopped
     env_file: ./.env
@@ -12,7 +12,7 @@ services:
 
   app:
     depends_on:
-      - mysqldb
+      - mysql
     build: /home/vagrant/lastproject/tpAchatProject
     restart: on-failure
     env_file: ./.env
@@ -20,7 +20,7 @@ services:
       - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
     environment:
       SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url"  : "jdbc:mysql://mysqldb:$MYSQLDB_DOCKER_PORT/$MYSQLDB_DATABASE?useSSL=false&allowPublicKeyRetrieval=true",
+        "spring.datasource.url"  : "jdbc:mysql://mysql:$MYSQLDB_DOCKER_PORT/$MYSQLDB_DATABASE?useSSL=false&allowPublicKeyRetrieval=true",
         "spring.datasource.username" : "$MYSQLDB_USER",
         "spring.datasource.password" : "$MYSQLDB_ROOT_PASSWORD",
         "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
