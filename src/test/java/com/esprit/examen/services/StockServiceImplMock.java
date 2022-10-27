@@ -30,7 +30,6 @@ import java.util.List;
 @ExtendWith(MockitoExtension.class)
 public class StockServiceImplMock {
 	
-	
 	  @Mock
 	  StockRepository sr = Mockito.mock(StockRepository.class);
 	  @InjectMocks
@@ -39,6 +38,7 @@ public class StockServiceImplMock {
 	    Stock stock1 = new Stock("stock1", 100, 1);
 	    Stock stock2 = new Stock("stock2", 200, 2);
 	   
+	    //Ajout d'un stock
 	    @Test
 	    public void addStockTest() {
 	    	MockitoAnnotations.initMocks(this);
