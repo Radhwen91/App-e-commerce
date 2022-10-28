@@ -2,9 +2,10 @@ package com.esprit.examen.converter;
 
 import org.modelmapper.ModelMapper;
 
+
 import com.esprit.examen.dto.ProduitDTO;
 import com.esprit.examen.entities.Produit;
-
+ 
 public class ProduitConverter {
 
 	public ProduitDTO convertEntityToDto(Produit produit) {

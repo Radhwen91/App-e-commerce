@@ -16,9 +16,15 @@ import com.esprit.examen.entities.DetailFacture;
 import com.esprit.examen.entities.Stock;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+
+
+
+
+@Getter
+@Setter
 public class ProduitDTO {
 
 	

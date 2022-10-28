@@ -28,10 +28,10 @@ public class ProduitServiceImpl implements IProduitService {
 	StockRepository stockRepository;
 	@Autowired
 	CategorieProduitRepository categorieProduitRepository;
-	@Autowired
-    ModelMapper modelMapper;
-	@Autowired
-	ProduitConverter produitConverter;
+///	@Autowired
+    ModelMapper modelMapper = new ModelMapper();
+	//@Autowired
+	ProduitConverter produitConverter = new ProduitConverter();
 	
 
 	@Override
