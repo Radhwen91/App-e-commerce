@@ -87,10 +87,10 @@
 	
 	</build>
 	<distributionManagement>
-	<snapshotRepository>
-	<id>deploymentRepo</id>
-	<name>Snapshot</name>
-	<url>http://192.168.1.13:8081/repository/maven-snapshots/</url>
-	</snapshotRepository>
+	    <repository>
+            <id>deploymentRepo</id>
+            <name>Realeases</name>
+            <url>http://192.168.1.13:8081/repository/maven-releases</url>
+            </repository>
 	</distributionManagement>
 </project>
