@@ -87,11 +87,6 @@
 	
 	</build>
 	<distributionManagement>
- 	<repository>
-        <id>deploymentRepo</id>
-        <name>Realeases</name>
-        <url>http://192.168.1.13:8081/repository/maven-releases</url>
-        </repository>
 	<snapshotRepository>
 	<id>deploymentRepo</id>
 	<name>Snapshot</name>
