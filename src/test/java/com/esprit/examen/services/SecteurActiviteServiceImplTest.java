@@ -23,8 +23,9 @@ public class SecteurActiviteServiceImplTest {
 	@Test
 	public void addSecteurActivite( ) {
 		SecteurActivite sa = new SecteurActivite(1000L,"aa","aa");
-		secteuractiviteservice.addSecteurActivite(sa);
-		log.info("s///////////////////////////////////////////////////////////////a:"+sa);
+		SecteurActivite s = secteuractiviteservice.addSecteurActivite(sa);
+		log.info("s///////////////////////////////////////////////////////////////a:"+s);
+	
 
 	}
 
