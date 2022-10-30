@@ -28,7 +28,7 @@ public class StockServiceImplTest {
 	@Autowired
 	IStockService stockService;
 	
-	@Test
+/*	@Test
 	public void testAddStock() {
 	List<Stock> stocks = stockService.retrieveAllStocks();
 	int expected = stocks.size();
@@ -43,18 +43,21 @@ public class StockServiceImplTest {
 	assertEquals(expected+1,finalListSize + 1 );
 	assertNotNull(savedStock.getLibelleStock());
 	stockService.deleteStock(savedStock.getIdStock());
-	}
+	}*/
 	
-/*	@Test
+	@Test
+	@Order(3)
 	public void testRetrieveAllStocks() {
 		List<Stock> stocks = stockService.retrieveAllStocks();
 		Assertions.assertEquals(4,stocks.size());
 		
-		}*/
+		}
 	
-/*	@Test
+	@Test
+	@Order(1)
 	public void testAddStock() {
-		List<Stock> stocks = stockService.retrieveAllStocks();
+
+	List<Stock> stocks = stockService.retrieveAllStocks();
 		int expected=stocks.size();
 		Stock s = new Stock("stock test",10,100);
 		Stock savedStock= stockService.addStock(s);
@@ -63,9 +66,10 @@ public class StockServiceImplTest {
 		assertNotNull(savedStock.getLibelleStock());
 		stockService.deleteStock(savedStock.getIdStock());
 		
-	} */
+	} 
 	
 	@Test
+	@Order(2)
 	public void testAddStockOptimized() {
 
 		Stock s = new Stock("stock test",10,100);
@@ -79,6 +83,7 @@ public class StockServiceImplTest {
 	} 
 	
 	@Test
+	@Order(4)
 	public void testDeleteStock() {
 		Stock s = new Stock("stock test",10,100);
 		Stock savedStock= stockService.addStock(s);
