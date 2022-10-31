@@ -1,0 +1,18 @@
+---
+- name: starting containers
+  hosts: all
+  remote_user: root
+  become: true
+  tasks:
+    - name: start nexus 
+      command: docker start nexus
+      ignore_errors: yes
+    - name: start sonarQube
+      command: docker start reverent_joliot
+      ignore_errors: yes
+    - name: start prometheus 
+      command: docker start prometheus
+      ignore_errors: yes
+    - name: start grafana container
+      command: docker start grafana
+      ignore_errors: yes
