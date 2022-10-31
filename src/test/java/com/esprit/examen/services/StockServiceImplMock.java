@@ -1,15 +1,19 @@
 package com.esprit.examen.services;
 
 import static org.junit.Assert.assertNotNull;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.Test;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -22,8 +26,9 @@ import com.esprit.examen.repositories.StockRepository;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.ArrayList;
 import java.util.List;
-
+import static org.mockito.Matchers.isA;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -32,13 +37,20 @@ public class StockServiceImplMock {
 	
 	  @Mock
 	  StockRepository sr = Mockito.mock(StockRepository.class);
+	  
 	  @InjectMocks
-	  StockServiceImpl ss;
+	  IStockService ss = new StockServiceImpl();
 	  
 	    Stock stock1 = new Stock("stock1", 100, 1);
 	    Stock stock2 = new Stock("stock2", 200, 2);
+	    
+	    List<Stock> listStocks = new ArrayList<Stock>() {
+	        {
+	            add(new Stock("Fruits", 80,10));
+	            add(new Stock("Légumes", 90,20));
+	        }
+	    };
 	   
-	    //Ajout d'un stock
 	    @Test
 	    public void addStockTest() {
 	    	MockitoAnnotations.initMocks(this);
@@ -50,13 +62,60 @@ public class StockServiceImplMock {
 	    }
 	    
 	    @Test
-	    public void retrieveAllStocksTest() {
+	    public void testRetrieveStockByid() {
+	        when(sr.findById(Mockito.anyLong())).thenReturn(Optional.of(stock1));
+	        Stock stockq = ss.retrieveStock(1L);
+
+	        System.out.println(stockq);
+	        Assertions.assertNotNull(stockq);
+	    }
+	    
+	    @Test
+	    public void testCreateNewObject() {
+	        Stock obj = new Stock("new", 2,3);
+	        when(sr.save(isA(Stock.class))).thenAnswer(invocation -> (Stock) invocation.getArguments()[0]);
+	        Stock returnedObj = ss.addStock(obj);
+	        ArgumentCaptor<Stock> savedObjectArgument = ArgumentCaptor.forClass(Stock.class);
+	        verify(sr, times(1)).save(savedObjectArgument.capture());
+	        verifyNoMoreInteractions(sr);
+
+	        Stock savedRestObject = savedObjectArgument.getValue();
+	        Assertions.assertNotNull(savedRestObject);
+	        
+	    }
+	      @Test
+	      public void testDeleteObject() {
+	            Stock stock = new Stock();
+	            stock.setLibelleStock("new test");
+	            stock.setIdStock(1L);
+	            when(sr.findById(stock.getIdStock())).thenReturn(Optional.of(stock));
+	            Stock s = ss.retrieveStock(1L);
+	            ss.deleteStock(s.getIdStock());
+	            verify(sr).deleteById(s.getIdStock());
+	            System.out.println("testDeleteObject works !");
+	        }
+	      
+		    @Test
+		    public void DeleteStockTest() {
+		    	MockitoAnnotations.initMocks(this);
+		        sr.save(stock1);
+		        ss.deleteStock(stock1.getIdStock());
+		        verify(sr, times(1)).deleteById(stock1.getIdStock());
+		        System.out.println("Delete works !");
+
+		    	}
+	    
+/*	    @Test
+	    public void testRetrieveAllStocks() {
 	    	MockitoAnnotations.initMocks(this);
-	        Mockito.when(sr.findAll()).thenReturn(Stream
-	                .of(stock1,stock2)
-	                .collect(Collectors.toList()));
-	        assertEquals(2,ss.retrieveAllStocks().size());
-	        System.out.println("Retrieve operators works !");
+
+	        List<Stock> stocks = new ArrayList();
+	        stocks.add(new Stock());
+	        when(sr.findAll()).thenReturn(stocks);
+	        List<Stock> expected = ss.retrieveAllStocks();
+	        Assertions.assertEquals(expected, stocks);
+	        verify(sr).findAll();
+
 	    }
 	    
 	    @Test
@@ -87,6 +146,6 @@ public class StockServiceImplMock {
 	        Assertions.assertNotNull(stock1);
 	        System.out.println(stock1);
 	        System.out.println(" Retrieve is working correctly...!!");
-	    }
+	    }*/
 
 }
