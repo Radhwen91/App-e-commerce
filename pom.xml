@@ -73,10 +73,10 @@
         </dependencies>
         <!-- Nexus -->
         <distributionManagement>
-                <snapshotRepository>
+                <repository>
                         <id>deploymentRepo</id>
-                        <url>http://192.168.1.14:8081/repository/maven-snapshots/</url>
-                </snapshotRepository>
+                        <url>http://192.168.1.14:8081/repository/maven-releases/</url>
+                </repository>
         </distributionManagement>
 
         <build>
