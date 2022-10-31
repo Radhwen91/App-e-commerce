@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@TestMethodOrder(OrderAnnotation.class)
 @Slf4j
 public class ClientServiceImplTest {
 	@Autowired
