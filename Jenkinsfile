@@ -79,7 +79,7 @@ stage("Nexus"){
 	
               
 
- /* stage('Deploy our image') { 
+  stage('Deploy our image') { 
             steps { 
                 script { 
                     docker.withRegistry( '', registryCredential ) { 
@@ -87,7 +87,7 @@ stage("Nexus"){
                     }
                 } 
             }
-        }*/
+        }
  	/*stage('Start container') { 
             steps { 
                 sh "docker-compose up" 
