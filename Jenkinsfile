@@ -44,7 +44,7 @@ pipeline {
                     } }
                 }
             }
-/*stage("Nexus"){
+stage("Nexus"){
 			steps{
 			sh """ mvn deploy"""
 			}
@@ -56,7 +56,7 @@ pipeline {
 			steps{
 			sh """ mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar"""
 			}
-			}*/
+			}
               
    stage('Run Unit Tests') {
             steps {
@@ -88,11 +88,11 @@ pipeline {
                 } 
             }
         }*/
- 	stage('Start container') { 
+ 	/*stage('Start container') { 
             steps { 
                 sh "docker-compose up" 
             }
-        } 
+        } */
 
          stage('Cleaning up') { 
             steps { 
