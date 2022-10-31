@@ -35,7 +35,7 @@ import static org.mockito.Matchers.isA;
 @ExtendWith(MockitoExtension.class)
 public class StockServiceImplMock {
 	
-	  @Mock
+/*	  @Mock
 	  StockRepository sr = Mockito.mock(StockRepository.class);
 	  
 	  @InjectMocks
