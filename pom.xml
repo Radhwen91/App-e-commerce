@@ -10,7 +10,7 @@
         </parent>
         <groupId>com.esprit.examen</groupId>
         <artifactId>tpAchatProject</artifactId>
-        <version>4.0</version>
+        <version>1.0</version>
         <name>tpAchatProject</name>
         <description>tpAchatProject</description>
         <properties>
@@ -70,13 +70,18 @@
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-devtools</artifactId>
                 </dependency>
+                <dependency>
+   					 <groupId>org.mockito</groupId>
+    				 <artifactId>mockito-inline</artifactId>
+    				 <scope>test</scope>
+				</dependency>
         </dependencies>
         <!-- Nexus -->
         <distributionManagement>
-                <repository>
+                <snapshotRepository>
                         <id>deploymentRepo</id>
-                        <url>http://192.168.1.14:8081/repository/maven-releases/</url>
-                </repository>
+                        <url>http://192.168.1.14:8081/repository/maven-snapshots/</url>
+                </snapshotRepository>
         </distributionManagement>
 
         <build>
