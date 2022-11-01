@@ -1,4 +1,4 @@
-/*package com.esprit.examen.services;
+package com.esprit.examen.services;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -20,7 +20,7 @@ import org.junit.runner.RunWith;
 import org.mockito.*;
 
 import com.esprit.examen.entities.Facture;
-import com.esprit.examen.entities.FactureDTO;
+
 import com.esprit.examen.repositories.FactureRepository;
 
 
@@ -33,7 +33,7 @@ FactureServiceImpl factureService;
 @Mock
 FactureRepository factureRepository; 
 
-	
+	/*
 
 @Test
 public void getAllFacture() throws ParseException {	
@@ -60,5 +60,5 @@ public void AddFacture() throws ParseException {
     
     verify(factureRepository, times(1)).save(f);
 }
-	
-}*/
+*/	
+}

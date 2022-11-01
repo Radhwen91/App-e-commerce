@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Set;
 import javax.transaction.Transactional;
 
-//import org.modelmapper.ModelMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//import com.esprit.examen.converter.FactureConverter;
+
 import com.esprit.examen.entities.DetailFacture;
 import com.esprit.examen.entities.Facture;
-//import com.esprit.examen.entities.FactureDTO;
+
 import com.esprit.examen.entities.Fournisseur;
 import com.esprit.examen.entities.Operateur;
 import com.esprit.examen.entities.Produit;
@@ -50,7 +50,7 @@ public class FactureServiceImpl implements IFactureService {
     
 	@Override
 	public List<Facture> retrieveAllFactures() {
-		List<Facture> factures = (List<Facture>) factureRepository.findAll();
+		List<Facture> factures = factureRepository.findAll();
 		for (Facture facture : factures) {
 			log.info(" facture : " + facture);
 		}
