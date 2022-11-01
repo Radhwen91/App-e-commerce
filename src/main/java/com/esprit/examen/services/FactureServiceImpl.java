@@ -50,24 +50,16 @@ public class FactureServiceImpl implements IFactureService {
     
 	@Override
 	public List<Facture> retrieveAllFactures() {
-		List<Facture> factures =  factureRepository.findAll();
+		List<Facture> factures = (List<Facture>) factureRepository.findAll();
 		for (Facture facture : factures) {
 			log.info(" facture : " + facture);
 		}
 		return factures;
 	}
 
-	/*
-	public FactureDTO ajouterFacture(FactureDTO f) {
-		Facture facture = factureConverter.convertDtoToEntity(f);
-		factureRepository.save(facture);
-		
-		return factureConverter.convertEntityToDto(facture);
-	}*/
 	
 	public Facture addFacture(Facture f) {
-		return  factureRepository.save(f);
-
+		return factureRepository.save(f);
 	}
 	/*
 	 * calculer les montants remise et le montant total d'un détail facture
