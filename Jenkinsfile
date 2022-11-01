@@ -28,7 +28,7 @@ pipeline {
              script {
              checkout([$class: 'GitSCM',
          branches: [[name: 'fares']],
-         userRemoteConfigs: [[url: 'https://github.com/Radhwen91/tpAchatProject.git',credentialsId:'425acdeb-e93f-4711-a994-d825a58d4b41']]])
+         userRemoteConfigs: [[url: 'https://github.com/Radhwen91/tpAchatProject.git',credentialsId:'7fac694d-f31d-414e-bbed-741a919effb4']]])
              
              }
              
