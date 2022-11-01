@@ -10,7 +10,7 @@ pipeline {
         NEXUS_URL= "192.168.100.158:8081"
         NEXUS_REPOSITORY = "nexus-repo-devops"
         NEXUS_CREDENTIALS_ID = "nexus-user-credentials"
-       credentialsId='0539a6a0-6f10-49aa-ada5-c0e509b3fdb8';
+       credentialsId='02e92f42-fe3d-496b-bfdb-3176ca1764e0';
     
     }
 
@@ -28,7 +28,7 @@ pipeline {
              script {
              checkout([$class: 'GitSCM',
          branches: [[name: 'fares']],
-         userRemoteConfigs: [[url: 'https://github.com/Radhwen91/tpAchatProject.git']]])
+         userRemoteConfigs: [[url: 'https://github.com/Radhwen91/tpAchatProject.git',credentialsId:'7fac694d-f31d-414e-bbed-741a919effb4']]])
              
              }
              
