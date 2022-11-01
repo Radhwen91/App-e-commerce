@@ -10,7 +10,7 @@ public interface IFactureService {
 
 	List<Facture> getFacturesByFournisseur(Long idFournisseur);
 
-	FactureDTO addFacture(FactureDTO f);
+	FactureDTO addFacture(Facture f);
 
 	void cancelFacture(Long id);
 
