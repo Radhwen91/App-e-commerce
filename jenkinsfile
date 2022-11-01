@@ -1,0 +1,92 @@
+pipeline {
+
+       
+
+    agent any
+
+    
+    
+    
+    stages {
+    
+            
+     
+             stage('Checkout GIT') {
+            steps {
+             script {
+             checkout([$class: 'GitSCM'])
+        
+             
+             }
+             
+                
+                    }
+                }
+	stage('Cleaning the project and artifact construction') {
+            steps {
+                script{
+		timestamps {
+                    sh 'mvn package'
+                    
+                    } }
+                }
+            }
+
+
+	
+
+		stage("Code Quality with SonarQube"){
+			steps{
+			sh """ mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar"""
+			}
+			}
+              
+   stage('Run Unit Tests') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                script{
+                    timestamps {
+                        sh 'mvn test'
+                            }
+                    }  } }}
+              
+
+
+ stage('Building our image') { 
+            steps { 
+                script { 
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+                }
+            } 
+        }
+	stage("Nexus"){
+			steps{
+			sh """ mvn deploy"""
+			}
+			}
+              
+
+  stage('Deploy our image') { 
+            steps { 
+                script { 
+                    docker.withRegistry( '', registryCredential ) { 
+                        dockerImage.push() 
+                    }
+                } 
+            }
+        } 
+
+         stage('Cleaning up') { 
+            steps { 
+                sh "docker rmi $registry:$BUILD_NUMBER" 
+            }
+        }
+       
+   
+
+       
+    }
+   
+    
+     }
+    
