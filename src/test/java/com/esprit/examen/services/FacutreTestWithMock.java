@@ -33,7 +33,7 @@ FactureServiceImpl factureService;
 @Mock
 FactureRepository factureRepository; 
 
-	/*
+	
 
 @Test
 public void getAllFacture() throws ParseException {	
@@ -60,5 +60,5 @@ public void AddFacture() throws ParseException {
     
     verify(factureRepository, times(1)).save(f);
 }
-*/	
+
 }
