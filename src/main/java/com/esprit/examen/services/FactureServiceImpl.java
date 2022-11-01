@@ -40,12 +40,13 @@ public class FactureServiceImpl implements IFactureService {
 	ProduitRepository produitRepository;
     @Autowired
     ReglementServiceImpl reglementService;
-    @Autowired
+   
+    /*@Autowired
     FactureConverter factureConverter;
    
     @Autowired
     ModelMapper modelMapper;
-    
+    */
     
 	@Override
 	public List<Facture> retrieveAllFactures() {
@@ -56,13 +57,13 @@ public class FactureServiceImpl implements IFactureService {
 		return factures;
 	}
 
-	
+	/*
 	public FactureDTO ajouterFacture(FactureDTO f) {
 		Facture facture = factureConverter.convertDtoToEntity(f);
 		factureRepository.save(facture);
 		
 		return factureConverter.convertEntityToDto(facture);
-	}
+	}*/
 	
 	public Facture addFacture(Facture f) {
 		return  factureRepository.save(f);

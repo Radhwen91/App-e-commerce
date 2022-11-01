@@ -3,14 +3,14 @@ package com.esprit.examen.controllers;
 import java.util.Date;
 import java.util.List;
 
-import org.modelmapper.ModelMapper;
+//import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import com.esprit.examen.entities.Facture;
 import com.esprit.examen.entities.FactureDTO;
 import com.esprit.examen.services.FactureServiceImpl;
-import com.esprit.examen.services.IFactureService;
+//import com.esprit.examen.services.IFactureService;
 
 import io.swagger.annotations.Api;
 
@@ -23,9 +23,11 @@ public class FactureRestController {
 
     @Autowired
     FactureServiceImpl factureService;
+    
+    /*
 @Autowired
 private ModelMapper modelMapper;
-    
+    */
     
     @GetMapping("/retrieve-all-factures")
     @ResponseBody
