@@ -23,6 +23,8 @@ import com.esprit.examen.entities.Facture;
 import com.esprit.examen.entities.FactureDTO;
 import com.esprit.examen.repositories.FactureRepository;
 
+
+
 public class FacutreTestWithMock {
 	
 @InjectMocks
@@ -34,18 +36,13 @@ FactureRepository factureRepository;
 	
 
 @Test
-public void getAllFacture() throws ParseException {
-	
-	
+public void getAllFacture() throws ParseException {	
 	List<Facture> listFacture = new ArrayList<Facture>();
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-	Date dateCreationFacture = dateFormat.parse("30/09/2000");
-	
+	Date dateCreationFacture = dateFormat.parse("30/09/2000");	
 	listFacture.add(new Facture(23,21,dateCreationFacture,dateCreationFacture,true));
 	listFacture.add(new Facture(30,44,dateCreationFacture,dateCreationFacture,true));
-	
 	when(factureService.retrieveAllFactures()).thenReturn(listFacture);
-
 	//test
 	List<Facture> empList = factureService.retrieveAllFactures();
 
@@ -53,6 +50,15 @@ public void getAllFacture() throws ParseException {
 	verify(factureService, times(1)).retrieveAllFactures();
 }
 	
-	
+@Test
+public void AddFacture() throws ParseException {
+	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	Date dateCreationFacture = dateFormat.parse("30/09/2000");
+	Facture f =new Facture(23,21,dateCreationFacture,dateCreationFacture,true);
+	MockitoAnnotations.initMocks(this);	
+	factureService.addFacture(f);
+    
+    verify(factureRepository, times(1)).save(f);
+}
 	
 }

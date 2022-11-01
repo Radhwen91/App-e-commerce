@@ -57,13 +57,16 @@ public class FactureServiceImpl implements IFactureService {
 	}
 
 	
-	public FactureDTO addFacture(FactureDTO f) {
+	public FactureDTO ajouterFacture(FactureDTO f) {
 		Facture facture = factureConverter.convertDtoToEntity(f);
 		factureRepository.save(facture);
 		
 		return factureConverter.convertEntityToDto(facture);
 	}
+	public Facture addFacture(Facture f) {
+		return  factureRepository.save(f);
 
+	}
 	/*
 	 * calculer les montants remise et le montant total d'un détail facture
 	 * ainsi que les montants d'une facture

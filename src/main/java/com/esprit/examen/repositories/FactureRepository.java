@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.esprit.examen.entities.Facture;
-import com.esprit.examen.entities.FactureDTO;
+
 import com.esprit.examen.entities.Fournisseur;
 
 @Repository
