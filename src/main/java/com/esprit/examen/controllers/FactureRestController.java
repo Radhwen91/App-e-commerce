@@ -11,6 +11,7 @@ import com.esprit.examen.entities.Facture;
 import com.esprit.examen.entities.FactureDTO;
 import com.esprit.examen.services.FactureServiceImpl;
 //import com.esprit.examen.services.IFactureService;
+import com.esprit.examen.services.IFactureService;
 
 import io.swagger.annotations.Api;
 
@@ -22,7 +23,7 @@ import io.swagger.annotations.Api;
 public class FactureRestController {
 
     @Autowired
-    FactureServiceImpl factureService;
+    IFactureService factureService;
     
     /*
 @Autowired
@@ -43,13 +44,15 @@ private ModelMapper modelMapper;
         return factureService.retrieveFacture(factureId);
     }
 
-  
+  /*
     @PostMapping("/add-facture")
     @ResponseBody
     public FactureDTO addFacture(@RequestBody FactureDTO f) {
     	return   factureService.ajouterFacture(f);
        
     }
+    */
+    
     @PostMapping("/add-facture")
     @ResponseBody
     public Facture addFacture(@RequestBody Facture f) {
