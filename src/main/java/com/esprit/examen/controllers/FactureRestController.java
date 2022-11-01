@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import com.esprit.examen.entities.Facture;
 import com.esprit.examen.entities.FactureDTO;
+import com.esprit.examen.services.FactureServiceImpl;
 import com.esprit.examen.services.IFactureService;
 
 import io.swagger.annotations.Api;
@@ -21,7 +22,7 @@ import io.swagger.annotations.Api;
 public class FactureRestController {
 
     @Autowired
-    IFactureService factureService;
+    FactureServiceImpl factureService;
 @Autowired
 private ModelMapper modelMapper;
     
@@ -44,10 +45,15 @@ private ModelMapper modelMapper;
     @PostMapping("/add-facture")
     @ResponseBody
     public FactureDTO addFacture(@RequestBody FactureDTO f) {
+    	return   factureService.ajouterFacture(f);
+       
+    }
+    @PostMapping("/add-facture")
+    @ResponseBody
+    public Facture addFacture(@RequestBody Facture f) {
     	return   factureService.addFacture(f);
        
     }
-
    
     @PutMapping("/cancel-facture/{facture-id}")
     @ResponseBody

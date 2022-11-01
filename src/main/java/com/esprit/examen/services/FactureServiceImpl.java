@@ -63,6 +63,7 @@ public class FactureServiceImpl implements IFactureService {
 		
 		return factureConverter.convertEntityToDto(facture);
 	}
+	
 	public Facture addFacture(Facture f) {
 		return  factureRepository.save(f);
 
