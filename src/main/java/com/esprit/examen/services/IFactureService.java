@@ -3,7 +3,7 @@ package com.esprit.examen.services;
 import java.util.Date;
 import java.util.List;
 import com.esprit.examen.entities.Facture;
-import com.esprit.examen.entities.FactureDTO;
+//import com.esprit.examen.entities.FactureDTO;
 
 public interface IFactureService {
 	List<Facture> retrieveAllFactures();

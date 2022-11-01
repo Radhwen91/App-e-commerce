@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import com.esprit.examen.entities.Facture;
-import com.esprit.examen.entities.FactureDTO;
+//import com.esprit.examen.entities.FactureDTO;
 import com.esprit.examen.services.FactureServiceImpl;
 //import com.esprit.examen.services.IFactureService;
 import com.esprit.examen.services.IFactureService;
