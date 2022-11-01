@@ -14,7 +14,7 @@ services:
   app:
     depends_on:
       - mysql
-    build: /var/lib/jenkins/workspace/test/tpAchatProject
+    build: /var/lib/jenkins/workspace/test
     restart: on-failure
     env_file: ./.env
     ports:
