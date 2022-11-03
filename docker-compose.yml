@@ -13,7 +13,7 @@ services:
       - data:/var/lib/mysql
   app:
     depends_on:
-      - mysql
+      - mysqldb
     image: ziedlahbib/tpachatproject:latest
     container_name: tpachatproject
     restart: on-failure
