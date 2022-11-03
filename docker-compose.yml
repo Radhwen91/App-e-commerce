@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3"
 services:
   mysqldb:
     image: mysql
@@ -14,8 +14,7 @@ services:
   app:
     depends_on:
       - mysqldb
-    image: ziedlahbib/tpachatproject:latest
-    container_name: tpachatproject
+    build: /home/tpAchatProject
     restart: on-failure
     env_file: ./.env
     ports:
