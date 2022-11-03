@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.esprit.examen.entities.Client;
 import com.esprit.examen.services.IClientService;
 
+import io.swagger.annotations.Api;
+
 
 
 @RestController
 @RequestMapping("/client")
+@Api(tags = "Gestion des clients")
 public class ClientRestController {
 	@Autowired
 	IClientService clientService;
