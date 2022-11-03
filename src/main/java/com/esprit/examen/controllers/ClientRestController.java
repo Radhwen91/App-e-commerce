@@ -21,8 +21,8 @@ import io.swagger.annotations.Api;
 
 
 @RestController
-@RequestMapping("/client")
 @Api(tags = "Gestion des clients")
+@RequestMapping("/client")
 public class ClientRestController {
 	@Autowired
 	IClientService clientService;
