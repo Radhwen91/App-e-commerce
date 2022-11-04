@@ -14,7 +14,7 @@ services:
   app:
     depends_on:
       - mysql
-    image: moallafares/tpachatproject:latest
+    image: moallafares/tpachatproject:18
     container_name: tpachatproject
     restart: on-failure
     env_file: ./.env
