@@ -69,6 +69,9 @@ import lombok.extern.slf4j.Slf4j;
         log.info("produit:"+produitAdded.getIdProduit()+"/"+produitAdded.getCodeProduit()+"/" + produitAdded.getLibelleProduit() +"/"+ produitAdded.getDateCreation() +"/"+ produitAdded.getDateDerniereModification());
         log.info("++++++++++++++++++++++testAddProduitMokito is works+++++++++++++++++++++ ");
 	}
+
+
+
 	@Order(5)
 	@Test
 	 void testRetrieveAllProduitsMockito() throws ParseException {
