@@ -88,17 +88,20 @@ stage('Building our image') {
                 } 
             }
         }
- 	stage('Start container') { 
-            steps { 
-                sh "docker-compose up" 
-            }
-        } 
+ 	
 
          stage('Cleaning up') { 
             steps { 
                 sh "docker rmi $registry:$BUILD_NUMBER" 
             }
         }
+        
+        
+        stage('Start container') { 
+            steps { 
+                sh "docker-compose up" 
+            }
+        } 
        
     } }
     
