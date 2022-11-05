@@ -12,6 +12,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +74,62 @@ public class FournisseurServiceImpTest {
 		Fournisseur fournisseur = fourinsseurService.addFournisseur(f) ;
 		assertEquals(expected + 1, fourinsseurService.retrieveAllFournisseurs().size());
 		fourinsseurService.deleteFournisseur(fournisseur.getIdFournisseur());
+
+	}
+	
+	
+	@Test
+	public void testUpdateFournisseur()
+	{
+		Fournisseur f= new Fournisseur();
+		f.setCode("testRetrieve");
+		f.setLibelle("AAAA");
+		f.setCategorieFournisseur(CategorieFournisseur.CONVENTIONNE);
+		fourinsseurService.addFournisseur(f);
+		Fournisseur fr= fourinsseurService.retrieveFournisseur(f.getIdFournisseur());
+		fr.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
+		fourinsseurService.updateFournisseur(fr);
+		assertEquals(fr.getCategorieFournisseur(),CategorieFournisseur.ORDINAIRE);
+		System.out.println("test update =>" + fr.getCategorieFournisseur());
+
+	}
+	
+	@Test
+	public void testRetrieveFournisseur() throws ParseException {
+		
+		List<Fournisseur> Fournisseurs = fourinsseurService.retrieveAllFournisseurs();
+		int expected = Fournisseurs.size();
+		Set<Facture> facture = new HashSet<>();
+		Set<SecteurActivite> SecteurActivite = new HashSet<>();
+		DetailFournisseur d = new DetailFournisseur() ;
+		Fournisseur f = new Fournisseur( 1000L , "aa", "aa",CategorieFournisseur.ORDINAIRE, facture, SecteurActivite, d);
+		Fournisseur fournisseur = fourinsseurService.addFournisseur(f) ;
+		assertEquals(expected + 1, fourinsseurService.retrieveAllFournisseurs().size());
+		fourinsseurService.deleteFournisseur(fournisseur.getIdFournisseur());
+
+	}
+	@Test
+	public void retrieveFournisseur() throws ParseException
+	{
+			Long id =(long)0;
+			Fournisseur f = new Fournisseur();
+			fourinsseurService.addFournisseur(f);
+			assertNull(fourinsseurService.retrieveFournisseur(id));				
+	}
+	@Test
+	public void TestAssignSecteurToFournisseur()
+	{
+		
+		SecteurActivite sa= new SecteurActivite();
+		sa.setCodeSecteurActivite("testgtest");
+		sa.setLibelleSecteurActivite("testlibelle");
+		
+		Fournisseur f= new Fournisseur();
+		f.setCode("njejnjnef");
+		f.setLibelle("AAAA");
+		f.setCategorieFournisseur(CategorieFournisseur.CONVENTIONNE);
+		fourinsseurService.addFournisseur(f);
+		assertNotNull(f.getIdFournisseur());
 
 	}
 }
