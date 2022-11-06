@@ -16,7 +16,6 @@ services:
     depends_on:
       - mysqldb
     image: ziedlahbib/tpachatproject:latest 
-    pull_policy: always
     container_name: tpachatproject
     restart: on-failure
     env_file: ./.env
