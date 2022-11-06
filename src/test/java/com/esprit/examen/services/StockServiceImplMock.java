@@ -111,10 +111,10 @@ public class StockServiceImplMock {
 	    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	    	Date now = new Date();
 			String msgDate = sdf.format(now);
-	        Assertions.assertEquals(result, msgDate + "\r\n"
-	        		+ ": le stock Fruits a une quantité de 80 inférieur à la quantité minimale a ne pas dépasser de 10\r\n"
-	        		+ msgDate + "\r\n"
-	        		+ ": le stock Légumes a une quantité de 90 inférieur à la quantité minimale a ne pas dépasser de 20\r\n");
+	        Assertions.assertEquals(result, msgDate + "\n"
+	        		+ ": le stock Fruits a une quantité de 80 inférieur à la quantité minimale a ne pas dépasser de 10\n"
+	        		+ msgDate + "\n"
+	        		+ ": le stock Légumes a une quantité de 90 inférieur à la quantité minimale a ne pas dépasser de 20\n");
 	    }
 
 }
