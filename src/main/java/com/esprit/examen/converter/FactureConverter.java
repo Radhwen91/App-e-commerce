@@ -5,7 +5,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import com.esprit.examen.entities.Facture;
-import com.esprit.examen.entities.FactureDTO;
 
 @Component
 public class FactureConverter {
