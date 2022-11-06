@@ -72,63 +72,48 @@ import lombok.extern.slf4j.Slf4j;
     
     @Test
     void testAddSecteurActivite() {
-    	SecteurActivite secteurActivite = new SecteurActivite();
-    	secteurActivite.setIdSecteurActivite(1L);
-    	secteurActivite.setCodeSecteurActivite("Code");
-    	secteurActivite.setLibelleSecteurActivite("libelle");;
-    	secteurActivite.setFournisseurs(new HashSet<>());
-    	
+        SecteurActivite secteurActivite = new SecteurActivite();
+        secteurActivite.setCodeSecteurActivite("Code Secteur Activite");
+        secteurActivite.setFournisseurs(new HashSet<>());
+        secteurActivite.setIdSecteurActivite(1L);
+        secteurActivite.setLibelleSecteurActivite("Libelle Secteur Activite");
+        when(this.secteurActiviteRepository.save((SecteurActivite) any())).thenReturn(secteurActivite);
 
-
-    	SecteurActivite secteurActivite2 = new SecteurActivite();
-    	secteurActivite2.setIdSecteurActivite(1L);
-    	secteurActivite2.setCodeSecteurActivite("Code2");
-    	secteurActivite2.setLibelleSecteurActivite("libelle2");;
-    	secteurActivite2.setFournisseurs(new HashSet<>());
-
-
-        assertSame(secteurActivite2, this.secteuractiviteservice.addSecteurActivite(secteurActivite2));
+        SecteurActivite secteurActivite1 = new SecteurActivite();
+        secteurActivite1.setCodeSecteurActivite("Code Secteur Activite");
+        secteurActivite1.setFournisseurs(new HashSet<>());
+        secteurActivite1.setIdSecteurActivite(1L);
+        secteurActivite1.setLibelleSecteurActivite("Libelle Secteur Activite");
+        assertSame(secteurActivite1, this.secteuractiviteservice.addSecteurActivite(secteurActivite1));
         verify(this.secteurActiviteRepository).save((SecteurActivite) any());
     }
     @Test
     void testUpdateSecteurActivite() {
-    	SecteurActivite secteurActivite = new SecteurActivite();
-    	secteurActivite.setIdSecteurActivite(1L);
-    	secteurActivite.setCodeSecteurActivite("Code");
-    	secteurActivite.setLibelleSecteurActivite("libelle");;
-    	secteurActivite.setFournisseurs(new HashSet<>());
+        SecteurActivite secteurActivite = new SecteurActivite();
+        secteurActivite.setCodeSecteurActivite("Code Secteur Activite");
+        secteurActivite.setFournisseurs(new HashSet<>());
+        secteurActivite.setIdSecteurActivite(1L);
+        secteurActivite.setLibelleSecteurActivite("Libelle Secteur Activite");
+        when(this.secteurActiviteRepository.save((SecteurActivite) any())).thenReturn(secteurActivite);
 
-
-    	SecteurActivite secteurActivite2 = new SecteurActivite();
-    	secteurActivite2.setIdSecteurActivite(1L);
-    	secteurActivite2.setCodeSecteurActivite("Code2");
-    	secteurActivite2.setLibelleSecteurActivite("libelle2");;
-    	secteurActivite2.setFournisseurs(new HashSet<>());
-
-
-
-    	SecteurActivite actualUpdateSecteurActiviteResult = this.secteuractiviteservice.updateSecteurActivite(secteurActivite2);
-        assertSame(secteurActivite2, actualUpdateSecteurActiviteResult);
+        SecteurActivite secteurActivite1 = new SecteurActivite();
+        secteurActivite1.setCodeSecteurActivite("Code Secteur Activite");
+        secteurActivite1.setFournisseurs(new HashSet<>());
+        secteurActivite1.setIdSecteurActivite(1L);
+        secteurActivite1.setLibelleSecteurActivite("Libelle Secteur Activite");
+        assertSame(secteurActivite1, this.secteuractiviteservice.updateSecteurActivite(secteurActivite1));
         verify(this.secteurActiviteRepository).save((SecteurActivite) any());
- 
     }
     @Test
     void testRetrieveSecteurActivite() {
-    	SecteurActivite secteurActivite = new SecteurActivite();
-    	secteurActivite.setIdSecteurActivite(1L);
-    	secteurActivite.setCodeSecteurActivite("Code");
-    	secteurActivite.setLibelleSecteurActivite("libelle");;
-    	secteurActivite.setFournisseurs(new HashSet<>());
-
-
-    	SecteurActivite secteurActivite2 = new SecteurActivite();
-    	secteurActivite2.setIdSecteurActivite(1L);
-    	secteurActivite2.setCodeSecteurActivite("Code2");
-    	secteurActivite2.setLibelleSecteurActivite("libelle2");;
-    	secteurActivite2.setFournisseurs(new HashSet<>());
-        Optional<SecteurActivite> ofResult = Optional.of(secteurActivite2);
+        SecteurActivite secteurActivite = new SecteurActivite();
+        secteurActivite.setCodeSecteurActivite("Code Secteur Activite");
+        secteurActivite.setFournisseurs(new HashSet<>());
+        secteurActivite.setIdSecteurActivite(1L);
+        secteurActivite.setLibelleSecteurActivite("Libelle Secteur Activite");
+        Optional<SecteurActivite> ofResult = Optional.of(secteurActivite);
         when(this.secteurActiviteRepository.findById((Long) any())).thenReturn(ofResult);
-        assertSame(secteurActivite2, this.secteuractiviteservice.retrieveSecteurActivite(123L));
+        assertSame(secteurActivite, this.secteuractiviteservice.retrieveSecteurActivite(123L));
         verify(this.secteurActiviteRepository).findById((Long) any());
     }
     
@@ -230,5 +215,12 @@ import lombok.extern.slf4j.Slf4j;
         verify(this.fournisseurRepository).save((Fournisseur) any());
         verify(this.fournisseurRepository).findById((Long) any());
     }
+    @Test
+    void testDeleteSecteurActivite() {
+        doNothing().when(this.secteurActiviteRepository).deleteById((Long) any());
+        this.secteuractiviteservice.deleteSecteurActivite(123L);
+        verify(this.secteurActiviteRepository).deleteById((Long) any());
+    }
+
 
 }
