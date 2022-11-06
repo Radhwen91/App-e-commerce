@@ -40,7 +40,7 @@ import lombok.extern.slf4j.Slf4j;
 @ContextConfiguration(classes = {SecteurActiviteServiceImpl.class,FournisseurServiceImpl.class})
 @ExtendWith(SpringExtension.class)
 @Slf4j
-public class SecteurActiviteServiceImplTest {
+ class SecteurActiviteServiceImplTest {
 
 	@Autowired
 	private SecteurActiviteServiceImpl secteuractiviteservice;
