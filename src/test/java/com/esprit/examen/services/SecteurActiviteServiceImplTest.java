@@ -79,8 +79,6 @@ public class SecteurActiviteServiceImplTest {
     	secteurActivite.setFournisseurs(new HashSet<>());
     	
 
-        assertSame(secteurActivite, this.secteuractiviteservice.addSecteurActivite(secteurActivite));
-        verify(this.secteurActiviteRepository).save((SecteurActivite) any());
 
     	SecteurActivite secteurActivite2 = new SecteurActivite();
     	secteurActivite2.setIdSecteurActivite(1L);
