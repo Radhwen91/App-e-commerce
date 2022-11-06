@@ -1,135 +1,105 @@
 package com.esprit.examen.services;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
-import javax.transaction.Transactional;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.esprit.examen.entities.CategorieFournisseur;
-import com.esprit.examen.entities.DetailFournisseur;
-import com.esprit.examen.entities.Facture;
 import com.esprit.examen.entities.Fournisseur;
-import com.esprit.examen.entities.Produit;
-import com.esprit.examen.entities.SecteurActivite;
-
-import lombok.extern.slf4j.Slf4j;
+import com.esprit.examen.repositories.FournisseurRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Slf4j
+@TestMethodOrder(OrderAnnotation.class)
+
 public class FournisseurServiceImpTest {
-	@Autowired
-	IFournisseurService fourinsseurService;
-	
-	
-	
-	@Test
-	public void testAddFournisseur() throws ParseException {
+private static final Logger l = LogManager.getLogger(FournisseurServiceImpTest.class);
 
-		Set<Facture> facture = new HashSet<>();
-		Set<SecteurActivite> SecteurActivite = new HashSet<>();
-		DetailFournisseur d = new DetailFournisseur() ;
-		Fournisseur f = new Fournisseur( 1000L , "aa", "aa",CategorieFournisseur.ORDINAIRE, facture, SecteurActivite, d);
-		Fournisseur fournisseur = fourinsseurService.addFournisseur(f) ;
-		System.out.print("Fournisseur: "+fournisseur);
-		assertNotNull(fournisseur.getIdFournisseur());
-		
-		fourinsseurService.deleteFournisseur(fournisseur.getIdFournisseur()) ;
+@Mock
+private FournisseurRepository fr;
+@InjectMocks
+private FournisseurServiceImpl fs;
+
+@Autowired 
+IFournisseurService fournisseurservice	;
+
+Fournisseur f1 = new Fournisseur("A58455xe8", "Adidas");
+Fournisseur f2 = new Fournisseur("sD8556Dxc6", "Nike");
+List<Fournisseur> Fournisseurlist = Arrays.asList(f1,f2);
+@Test
+@Order(1)
+public void TestAddFournisseur () {
+	when(fr.save(f1)).thenReturn(f1);
+    assertNotNull(f1);
+    assertEquals(f1,fs.addFournisseur(f1));
+	System.out.print("Fournisseur "+ f1.getLibelle()+ " added succesfully");
 	}
-	@Test
-	public void testDeleteFournisseur() throws ParseException {
+
+@Test
+@Order(5)
+
+public void TestDeleteFournisseur() {
+	l.debug("Test méthode DeleteFournisseur");
+	try {
+		fournisseurservice.deleteFournisseurById((long) 6); 
 		
-		Set<Facture> facture = new HashSet<>();
-		Set<SecteurActivite> SecteurActivite = new HashSet<>();
-		DetailFournisseur d = new DetailFournisseur() ;
-		Fournisseur f = new Fournisseur( 1000L , "aa", "aa",CategorieFournisseur.ORDINAIRE, facture, SecteurActivite, d);
-		Fournisseur fournisseur = fourinsseurService.addFournisseur(f) ;
-		assertNull(fourinsseurService.retrieveAllFournisseurs());
+		assertNull(fs.getFournisseurById((long) 6));
+		l.info(" Fournisseur deleted succesfully");
+	} catch (Exception e) {
+		l.error("méthode Delete Fournisseur error :"+ e);
 	}
 	
-	@Test
-	public void testRetrieveAllFournisseur() throws ParseException {
-		
-		List<Fournisseur> Fournisseurs = fourinsseurService.retrieveAllFournisseurs();
-		int expected = Fournisseurs.size();
-		Set<Facture> facture = new HashSet<>();
-		Set<SecteurActivite> SecteurActivite = new HashSet<>();
-		DetailFournisseur d = new DetailFournisseur() ;
-		Fournisseur f = new Fournisseur( 1000L , "aa", "aa",CategorieFournisseur.ORDINAIRE, facture, SecteurActivite, d);
-		Fournisseur fournisseur = fourinsseurService.addFournisseur(f) ;
-		assertEquals(expected + 1, fourinsseurService.retrieveAllFournisseurs().size());
-		fourinsseurService.deleteFournisseur(fournisseur.getIdFournisseur());
+}
+@Test
+@Order(2)
+public void TestUpdateNomById() {
+	l.debug("Test méthode Modifier Nom d'un Fournisseur by id");
+	try {
+		String libelle= "Decathlon";
 
-	}
-	
-	
-	@Test
-	public void testUpdateFournisseur()
-	{
-		Fournisseur f= new Fournisseur();
-		f.setCode("testRetrieve");
-		f.setLibelle("AAAA");
-		f.setCategorieFournisseur(CategorieFournisseur.CONVENTIONNE);
-		fourinsseurService.addFournisseur(f);
-		Fournisseur fr= fourinsseurService.retrieveFournisseur(f.getIdFournisseur());
-		fr.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
-		fourinsseurService.updateFournisseur(fr);
-		assertEquals(fr.getCategorieFournisseur(),CategorieFournisseur.ORDINAIRE);
-		System.out.println("test update =>" + fr.getCategorieFournisseur());
+		fournisseurservice.UpdateLibelleFournisseurById(libelle, (long) 3);
 
-	}
-	
-	@Test
-	public void testRetrieveFournisseur() throws ParseException {
-		
-		List<Fournisseur> Fournisseurs = fourinsseurService.retrieveAllFournisseurs();
-		int expected = Fournisseurs.size();
-		Set<Facture> facture = new HashSet<>();
-		Set<SecteurActivite> SecteurActivite = new HashSet<>();
-		DetailFournisseur d = new DetailFournisseur() ;
-		Fournisseur f = new Fournisseur( 1000L , "aa", "aa",CategorieFournisseur.ORDINAIRE, facture, SecteurActivite, d);
-		Fournisseur fournisseur = fourinsseurService.addFournisseur(f) ;
-		assertEquals(expected + 1, fourinsseurService.retrieveAllFournisseurs().size());
-		fourinsseurService.deleteFournisseur(fournisseur.getIdFournisseur());
+		Fournisseur f = fournisseurservice.getFournisseurById((long) 3);
 
-	}
-	@Test
-	public void retrieveFournisseur() throws ParseException
-	{
-			Long id =(long)0;
-			Fournisseur f = new Fournisseur();
-			fourinsseurService.addFournisseur(f);
-			assertNull(fourinsseurService.retrieveFournisseur(id));				
-	}
-	@Test
-	public void TestAssignSecteurToFournisseur()
-	{
+		assertThat(f.getLibelle()).isEqualTo(libelle);
+		l.info("nom Fournisseur modified successfully!");
 		
-		SecteurActivite sa= new SecteurActivite();
-		sa.setCodeSecteurActivite("testgtest");
-		sa.setLibelleSecteurActivite("testlibelle");
-		
-		Fournisseur f= new Fournisseur();
-		f.setCode("njejnjnef");
-		f.setLibelle("AAAA");
-		f.setCategorieFournisseur(CategorieFournisseur.CONVENTIONNE);
-		fourinsseurService.addFournisseur(f);
-		assertNotNull(f.getIdFournisseur());
-
+	} catch (Exception e) {
+		l.error(String.format("ERROR : %s ", e));
 	}
 }
+
+@Test
+@Order(3)
+public void TestUpdateFournisseur() {
+    when(fr.save(f1)).thenReturn(f1);
+    assertNotNull(f1);
+    assertEquals(f1, fs.updateFournisseur(f1));
+
+    System.out.println("Fournisseur Updated Successfully !");
+}
+@Test
+@Order(4)
+public void TestRetrieveAllFournisseurs() {
+		l.debug("Test méthode Retrieve Fournisseurs");
+        when(fr.findAll()).thenReturn(Fournisseurlist);
+		List<Fournisseur> Fournisseurlist = (List<Fournisseur>) fournisseurservice.retrieveAllFournisseurs();
+		Assertions.assertNotNull(Fournisseurlist);
+        l.info("Retrieve  All Fournisseurs done !!!");
+		}
+	}
