@@ -1,11 +1,9 @@
 package com.esprit.examen.services;
 
-import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.esprit.examen.entities.CategorieProduit;
 import com.esprit.examen.entities.Produit;
 import com.esprit.examen.entities.Stock;
 import com.esprit.examen.repositories.CategorieProduitRepository;
@@ -40,26 +38,23 @@ public class ProduitServiceImpl implements IProduitService {
 		return p;
 	}
 
-	
-
 	@Override
 	public void deleteProduit(Long produitId) {
 		try {
-		produitRepository.deleteById(produitId);
-		log.info(" Produit a ete supprimée ");
-		}
-		catch(Exception e) {
+			produitRepository.deleteById(produitId);
+			log.info(" Produit a ete supprimée ");
+		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
-		
+
 	}
 
 	@Override
 	public Produit updateProduit(Produit p) {
 		try {
-		 produitRepository.save(p);
-		log.info(" Produit a ete modifié ");
-		}catch(Exception e) {
+			produitRepository.save(p);
+			log.info(" Produit a ete modifié ");
+		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
 		return p;
@@ -77,14 +72,13 @@ public class ProduitServiceImpl implements IProduitService {
 		Produit produit = produitRepository.findById(idProduit).orElse(null);
 		Stock stock = stockRepository.findById(idStock).orElse(null);
 		try {
-		produit.setStock(stock);
-		log.info(" Produit et tck a ete assignée ");
-		produitRepository.save(produit);
-		log.info(" Produit a ete enregistrée ");
-		}catch(Exception e) {
+			produit.setStock(stock);
+			log.info(" Produit et tck a ete assignée ");
+			produitRepository.save(produit);
+			log.info(" Produit a ete enregistrée ");
+		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
 	}
-
 
 }
