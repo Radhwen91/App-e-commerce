@@ -76,7 +76,7 @@ FactureRepository factureRepository;
 
 
 @Test
-	public void testDelete() throws ParseException {
+	 void testDelete() throws ParseException {
 	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	Date dateCreationFacture = dateFormat.parse("30/09/2000");
