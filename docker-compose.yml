@@ -12,7 +12,7 @@ services:
       - 3306:3306
     volumes:
       - data:/var/lib/mysql
-  app:
+  spring:
     depends_on:
       - mysqldb
     build: /home/tpAchatProject
@@ -32,7 +32,16 @@ services:
       - .m2:/root/.m2
     stdin_open: true
     tty: true
-
+  angular:
+    image: nginx
+    restart: on-failure
+    container_name: angular
+    ports:
+     - 2011:2011
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf:z
+      - /var/lib/jenkins/workspace/LiaisonJenkinsDockerTest/crud-tuto-front/dist/crudtuto-Front/:/usr/share/nginx/html:z
+ 
 volumes:
   data:
 
