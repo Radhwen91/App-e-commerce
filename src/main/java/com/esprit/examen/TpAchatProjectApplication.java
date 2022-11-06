@@ -19,13 +19,7 @@ public class TpAchatProjectApplication {
 		
 }
 	
-	/*
-	@Bean
-	public ModelMapper modelMapper() {
 
-	    return new ModelMapper();
-
-	  }*/
 	
 }
 	
