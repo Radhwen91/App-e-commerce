@@ -22,6 +22,7 @@ public class StockRestController {
 	IStockService stockService;
 
 	// http://localhost:8089/SpringMVC/stock/retrieve-all-stocks
+	@CrossOrigin("*")
 	@GetMapping("/retrieve-all-stocks")
 	@ResponseBody
 	public List<Stock> getStocks() {
@@ -30,6 +31,7 @@ public class StockRestController {
 	}
 
 	// http://localhost:8089/SpringMVC/stock/retrieve-stock/8
+	@CrossOrigin("*")
 	@GetMapping("/retrieve-stock/{stock-id}")
 	@ResponseBody
 	public Stock retrieveStock(@PathVariable("stock-id") Long stockId) {
@@ -37,6 +39,7 @@ public class StockRestController {
 	}
 
 	// http://localhost:8089/SpringMVC/stock/add-stock
+	@CrossOrigin("*")
 	@PostMapping("/add-stock")
 	@ResponseBody
 	public Stock addStock(@RequestBody Stock stock) {
@@ -45,6 +48,7 @@ public class StockRestController {
 	}
 
 	// http://localhost:8089/SpringMVC/stock/remove-stock/{stock-id}
+	@CrossOrigin("*")
 	@DeleteMapping("/remove-stock/{stock-id}")
 	@ResponseBody
 	public void removeStock(@PathVariable("stock-id") Long stockId) {

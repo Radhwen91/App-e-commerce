@@ -4,11 +4,13 @@ import static org.junit.Assert.assertNotNull;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -23,26 +25,34 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.esprit.examen.entities.Stock;
 import com.esprit.examen.repositories.StockRepository;
+
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Optional;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import static org.mockito.Matchers.isA;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith(MockitoExtension.class)
+@Slf4j
 public class StockServiceImplMock {
 	
-/*	  @Mock
-	  StockRepository sr = Mockito.mock(StockRepository.class);
+	  @Mock
+	  StockRepository sr;
 	  
 	  @InjectMocks
 	  IStockService ss = new StockServiceImpl();
 	  
-	    Stock stock1 = new Stock("stock1", 100, 1);
-	    Stock stock2 = new Stock("stock2", 200, 2);
+	    Stock stock1 = new Stock("Cake", 100, 1);
+	    Stock stock2 = new Stock("Chocolat", 200, 2);
 	    
 	    List<Stock> listStocks = new ArrayList<Stock>() {
 	        {
@@ -50,102 +60,61 @@ public class StockServiceImplMock {
 	            add(new Stock("Légumes", 90,20));
 	        }
 	    };
+	    
+	    @Before
+	    public void init() {
+	    	MockitoAnnotations.initMocks(this);	    	
+	    }
+	    
+	    @Test
+	    public void retrieveAllStocksTest() {
+	    	when(sr.findAll()).thenReturn(listStocks);
+	        List<Stock> result = ss.retrieveAllStocks();
+	        Assertions.assertEquals(listStocks, result);
+	    }
 	   
 	    @Test
 	    public void addStockTest() {
-	    	MockitoAnnotations.initMocks(this);
-	    	stock2.setIdStock(23L);
-	        ss.addStock(stock2);
-	        verify(sr, times(1)).save(stock2);
-	        System.out.println(stock2);
-	        System.out.println(" Create is working correctly...!!");
+	    	Stock stock3 = new Stock();
+	    	stock3.setIdStock(3L);
+	    	when(ss.addStock(stock3)).thenReturn(stock3);
+	        Stock result = ss.addStock(stock3);
+	        Assertions.assertEquals(stock3, result);
 	    }
 	    
 	    @Test
-	    public void testRetrieveStockByid() {
-	        when(sr.findById(Mockito.anyLong())).thenReturn(Optional.of(stock1));
-	        Stock stockq = ss.retrieveStock(1L);
-
-	        System.out.println(stockq);
-	        Assertions.assertNotNull(stockq);
+	    public void deleteStockTest() {
+	    	doNothing().when(sr).deleteById(1L);
+	    	when(sr.findById(1L)).thenReturn(Optional.ofNullable(null));
+	        Stock result = ss.deleteStock(1L);
+	        Assertions.assertNull(result);
+	    } 
+	    
+	    @Test
+	    public void updateStockTest() {
+	    	when(sr.save(stock2)).thenReturn(stock2);
+	        Stock result = ss.updateStock(stock2);
+	        Assertions.assertEquals(result, stock2);
 	    }
 	    
 	    @Test
-	    public void testCreateNewObject() {
-	        Stock obj = new Stock("new", 2,3);
-	        when(sr.save(isA(Stock.class))).thenAnswer(invocation -> (Stock) invocation.getArguments()[0]);
-	        Stock returnedObj = ss.addStock(obj);
-	        ArgumentCaptor<Stock> savedObjectArgument = ArgumentCaptor.forClass(Stock.class);
-	        verify(sr, times(1)).save(savedObjectArgument.capture());
-	        verifyNoMoreInteractions(sr);
-
-	        Stock savedRestObject = savedObjectArgument.getValue();
-	        Assertions.assertNotNull(savedRestObject);
-	        
-	    }
-	      @Test
-	      public void testDeleteObject() {
-	            Stock stock = new Stock();
-	            stock.setLibelleStock("new test");
-	            stock.setIdStock(1L);
-	            when(sr.findById(stock.getIdStock())).thenReturn(Optional.of(stock));
-	            Stock s = ss.retrieveStock(1L);
-	            ss.deleteStock(s.getIdStock());
-	            verify(sr).deleteById(s.getIdStock());
-	            System.out.println("testDeleteObject works !");
-	        }
-	      
-		    @Test
-		    public void DeleteStockTest() {
-		    	MockitoAnnotations.initMocks(this);
-		        sr.save(stock1);
-		        ss.deleteStock(stock1.getIdStock());
-		        verify(sr, times(1)).deleteById(stock1.getIdStock());
-		        System.out.println("Delete works !");
-
-		    	}
-	    
-/*	    @Test
-	    public void testRetrieveAllStocks() {
-	    	MockitoAnnotations.initMocks(this);
-
-	        List<Stock> stocks = new ArrayList();
-	        stocks.add(new Stock());
-	        when(sr.findAll()).thenReturn(stocks);
-	        List<Stock> expected = ss.retrieveAllStocks();
-	        Assertions.assertEquals(expected, stocks);
-	        verify(sr).findAll();
-
+	    public void retreiveStockTest() {
+	    	when(sr.findById(1L)).thenReturn(Optional.of(stock1));
+	        Stock result = ss.retrieveStock(1L);
+	        Assertions.assertEquals(result, stock1);
 	    }
 	    
 	    @Test
-	    public void DeleteStockTest() {
-	    	MockitoAnnotations.initMocks(this);
-	        sr.save(stock1);
-	        ss.deleteStock(stock1.getIdStock());
-	        verify(sr, times(1)).deleteById(stock1.getIdStock());
-	        System.out.println("Delete works !");
-
-	    	}
-	    
-	    @Test
-	    public void UpdateStockTest() {
-	    	MockitoAnnotations.initMocks(this);
-	        when(sr.save(stock1)).thenReturn(stock1);
-	        assertNotNull(stock1);
-	        assertEquals(stock1, ss.updateStock(stock1));
-	        System.out.println("Update works !");
+	    public void retrieveStatusStockTest() {
+	    	when(sr.retrieveStatusStock()).thenReturn(listStocks);
+	    	String result = ss.retrieveStatusStock();
+	    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	    	Date now = new Date();
+			String msgDate = sdf.format(now);
+	        Assertions.assertEquals(result, msgDate + "\r\n"
+	        		+ ": le stock Fruits a une quantité de 80 inférieur à la quantité minimale a ne pas dépasser de 10\r\n"
+	        		+ msgDate + "\r\n"
+	        		+ ": le stock Légumes a une quantité de 90 inférieur à la quantité minimale a ne pas dépasser de 20\r\n");
 	    }
-
-	    @Test
-	    public void retrieveStockTest() {
-	    	MockitoAnnotations.initMocks(this);
-	        stock1.setIdStock(1L);
-	        Mockito.when(sr.findById(1L)).thenReturn(Optional.of(stock1));
-	        ss.retrieveStock(1L);
-	        Assertions.assertNotNull(stock1);
-	        System.out.println(stock1);
-	        System.out.println(" Retrieve is working correctly...!!");
-	    }*/
 
 }

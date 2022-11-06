@@ -40,9 +40,10 @@ public class StockServiceImpl implements IStockService {
 	}
 
 	@Override
-	public void deleteStock(Long stockId) {
+	public Stock deleteStock(Long stockId) {
 		log.info("In method deleteStock");
 		stockRepository.deleteById(stockId);
+		return stockRepository.findById(stockId).orElse(null);
 
 	}
 
@@ -66,14 +67,14 @@ public class StockServiceImpl implements IStockService {
 
 	@Override
 	public String retrieveStatusStock() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date now = new Date();
 		String msgDate = sdf.format(now);
 		String finalMessage = "";
 		String newLine = System.getProperty("line.separator");
 		List<Stock> stocksEnRouge = (List<Stock>) stockRepository.retrieveStatusStock();
 		for (int i = 0; i < stocksEnRouge.size(); i++) {
-			finalMessage = newLine + finalMessage + msgDate + newLine + ": le stock "
+			finalMessage += msgDate + newLine + ": le stock "
 					+ stocksEnRouge.get(i).getLibelleStock() + " a une quantité de " + stocksEnRouge.get(i).getQte()
 					+ " inférieur à la quantité minimale a ne pas dépasser de " + stocksEnRouge.get(i).getQteMin()
 					+ newLine;
