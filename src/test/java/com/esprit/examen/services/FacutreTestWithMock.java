@@ -90,6 +90,7 @@ else
 	factureService.deleteFacture((factureService.retrieveFacture(1L).getIdFacture()));
     verify(factureRepository, Mockito.times(1)).deleteById(f.getIdFacture());
       log.info("Delete done ///////////////// ");
+    
 
 
 
