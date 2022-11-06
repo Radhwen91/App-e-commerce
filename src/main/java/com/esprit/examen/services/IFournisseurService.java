@@ -16,11 +16,5 @@ public interface IFournisseurService {
 	Fournisseur retrieveFournisseur(Long id);
 	
 	void assignSecteurActiviteToFournisseur(Long idSecteurActivite, Long idFournisseur);
-	
-	public void deleteFournisseurById(Long id);
-	
-	public Fournisseur getFournisseurById(Long id);
-	
-	public void UpdateLibelleFournisseurById(String libelle,Long id);
 
 }
