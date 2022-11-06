@@ -36,7 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 @TestMethodOrder(OrderAnnotation.class)
 @ExtendWith(MockitoExtension.class)
 @Slf4j
- class FacutreTestWithMock {
+ class TestFacture {
 	
 @InjectMocks
 FactureServiceImpl factureService;

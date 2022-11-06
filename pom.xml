@@ -102,20 +102,25 @@
     <version>3.1.0</version>
 </plugin> 
 
-<plugin>
-	<groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-surefire-plugin</artifactId>
-	<configuration>
-		<includes>
-			<include>**/*Tests.java</include>
-		</includes>
-		<excludes>
-			<exclude>**/Abstract*.java</exclude>
-		</excludes>
-		<junitArtifactName>org.junit:com.springsource.org.junit</junitArtifactName>
-		<argLine>-javaagent:${user.home}/.m2/repository/org/springframework/org.springframework.instrument/3.0.0.M3/org.springframework.instrument-3.0.0.M3.jar</argLine>
-	</configuration>
-</plugin>
+  <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>3.0.0-M7</version>
+        <configuration>
+          <outputDirectory>${basedir}/target/newsite</outputDirectory>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>2.1</version>
+        <configuration>
+          <outputDirectory>${basedir}/target/newsite</outputDirectory>
+        </configuration>
+      </plugin>
+      
+      
+      
 		</plugins>
 			
 	</build>
