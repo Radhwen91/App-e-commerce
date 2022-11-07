@@ -23,8 +23,7 @@ public class StockRestController {
 	@GetMapping("/retrieve-all-stocks")
 	@ResponseBody
 	public List<Stock> getStocks() {
-		List<Stock> list = stockService.retrieveAllStocks();
-		return list;
+		return stockService.retrieveAllStocks();
 	}
 
 	@CrossOrigin("*")
@@ -38,8 +37,8 @@ public class StockRestController {
 	@PostMapping("/add-stock")
 	@ResponseBody
 	public Stock addStock(@RequestBody Stock stock) {
-		Stock s = stockService.addStock(stock);
-		return s;
+		return stockService.addStock(stock);
+
 	}
 
 	@CrossOrigin("*")
