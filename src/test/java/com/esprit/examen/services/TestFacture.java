@@ -45,7 +45,6 @@ FactureServiceImpl factureService;
 @Mock
 FactureRepository factureRepository; 
 
-FactureConverter factureConverter = new FactureConverter();
 List<DetailFacture> listDetail = new ArrayList<DetailFacture>();
 List<Reglement> listReglement = new ArrayList<Reglement>();
 Fournisseur fourn = new Fournisseur();
