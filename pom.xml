@@ -87,7 +87,7 @@
 
         <build>
                 <plugins>
-                        <plugin>
+                <plugin>
                                 <groupId>org.springframework.boot</groupId>
                                 <artifactId>spring-boot-maven-plugin</artifactId>
                         </plugin>
@@ -103,9 +103,11 @@
                 <configuration>
                         <includes>
                         <include>**/*Test.java</include>
+			<include>**/*Mock.java</include>
                         </includes>
                 </configuration>
             </plugin>
+      
                 </plugins>
 
         </build>
