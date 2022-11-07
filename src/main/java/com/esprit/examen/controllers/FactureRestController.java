@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.esprit.examen.converter.FactureDTO;
 import com.esprit.examen.entities.Facture;
 import com.esprit.examen.services.IFactureService;
 
@@ -39,13 +38,24 @@ public class FactureRestController {
    
     @PostMapping("/add-facture")
     @ResponseBody
-    public FactureDTO addFacture(@RequestBody FactureDTO f) {
+    public Facture addFacture(@RequestBody Facture f) {
          return  factureService.addFacture(f);
          
     }
 
 
+    @PutMapping("/cancel-facture/{facture-id}")
+    @ResponseBody
+    public void cancelFacture(@PathVariable("facture-id") Long factureId) {
+        factureService.cancelFacture(factureId);
+    }
 
+    
+    @GetMapping("/getFactureByFournisseur/{fournisseur-id}")
+    @ResponseBody
+    public List<Facture> getFactureByFournisseur(@PathVariable("fournisseur-id") Long fournisseurId) {
+        return factureService.getFacturesByFournisseur(fournisseurId);
+    }
 
 
    
