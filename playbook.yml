@@ -1,6 +1,6 @@
 ---
 - name: starting containers
-  hosts: all
+  hosts: localhost
   remote_user: root
   become: true
   tasks:
