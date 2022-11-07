@@ -4,12 +4,9 @@ import java.util.List;
 import java.util.Set;
 import javax.transaction.Transactional;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.esprit.examen.converter.FactureConverter;
-import com.esprit.examen.converter.FactureDTO;
 import com.esprit.examen.entities.DetailFacture;
 import com.esprit.examen.entities.Facture;
 

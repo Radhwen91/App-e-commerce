@@ -2,7 +2,6 @@ package com.esprit.examen.services;
 
 import java.util.List;
 
-import com.esprit.examen.converter.FactureDTO;
 import com.esprit.examen.entities.Facture;
 
 public interface IFactureService {
