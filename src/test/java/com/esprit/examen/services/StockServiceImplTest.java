@@ -1,9 +1,9 @@
 package com.esprit.examen.services;
+
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
@@ -25,71 +25,65 @@ import lombok.extern.slf4j.Slf4j;
 @TestMethodOrder(OrderAnnotation.class)
 @Slf4j
 public class StockServiceImplTest {
-    @Autowired
-    IStockService stockService;
+	@Autowired
+	IStockService stockService;
 
-/*      @Test
-    public void testAddStock() {
-    List<Stock> stocks = stockService.retrieveAllStocks();
-    int expected = stocks.size();
-    List<Stock> finalList =new ArrayList<>();
-    finalList.addAll(stocks);
-    int finalListSize=finalList.size() ;
-    Stock s = new Stock();
-    s.setLibelleStock("stock test");
-    s.setQte(30);
-    s.setQteMin(60);
-    Stock savedStock= stockService.addStock(s);
-    assertEquals(expected+1,finalListSize + 1 );
-    assertNotNull(savedStock.getLibelleStock());
-    stockService.deleteStock(savedStock.getIdStock());
-    }*/
+	/*
+	 * @Test public void testAddStock() { List<Stock> stocks =
+	 * stockService.retrieveAllStocks(); int expected = stocks.size(); List<Stock>
+	 * finalList =new ArrayList<>(); finalList.addAll(stocks); int
+	 * finalListSize=finalList.size() ; Stock s = new Stock();
+	 * s.setLibelleStock("stock test"); s.setQte(30); s.setQteMin(60); Stock
+	 * savedStock= stockService.addStock(s); assertEquals(expected+1,finalListSize +
+	 * 1 ); assertNotNull(savedStock.getLibelleStock());
+	 * stockService.deleteStock(savedStock.getIdStock()); }
+	 */
 
-    @Test
-    @Order(3)
-    public void testRetrieveAllStocks() {
-            List<Stock> stocks = stockService.retrieveAllStocks();
-            Assertions.assertEquals(4,stocks.size());
+	@Test
+	@Order(3)
+	public void testRetrieveAllStocks() {
+		List<Stock> stocks = stockService.retrieveAllStocks();
+		Assertions.assertEquals(4, stocks.size());
 
-            }
+	}
 
-    @Test
-    @Order(1)
-    public void testAddStock() {
+	@Test
+	@Order(1)
+	public void testAddStock() {
 
-    List<Stock> stocks = stockService.retrieveAllStocks();
-            int expected=stocks.size();
-            Stock s = new Stock("stock test",10,100);
-            Stock savedStock= stockService.addStock(s);
+		List<Stock> stocks = stockService.retrieveAllStocks();
+		int expected = stocks.size();
+		Stock s = new Stock("stock test", 10, 100);
+		Stock savedStock = stockService.addStock(s);
 
-            assertEquals(expected+1, stockService.retrieveAllStocks().size());
-            assertNotNull(savedStock.getLibelleStock());
-            stockService.deleteStock(savedStock.getIdStock());
+		assertEquals(expected + 1, stockService.retrieveAllStocks().size());
+		assertNotNull(savedStock.getLibelleStock());
+		stockService.deleteStock(savedStock.getIdStock());
 
-    }
+	}
 
-    @Test
-    @Order(2)
-    public void testAddStockOptimized() {
+	@Test
+	@Order(2)
+	public void testAddStockOptimized() {
 
-            Stock s = new Stock("stock test",10,100);
-            Stock savedStock= stockService.addStock(s);
-            log.info("Stock ADDED"+stockService.addStock(s));
-            assertNotNull(savedStock.getIdStock());
-            assertSame(10, savedStock.getQte());
-            assertTrue(savedStock.getQteMin()>0);
-            stockService.deleteStock(savedStock.getIdStock());
+		Stock s = new Stock("stock test", 10, 100);
+		Stock savedStock = stockService.addStock(s);
+		log.info("Stock ADDED" + stockService.addStock(s));
+		assertNotNull(savedStock.getIdStock());
+		assertSame(10, savedStock.getQte());
+		assertTrue(savedStock.getQteMin() > 0);
+		stockService.deleteStock(savedStock.getIdStock());
 
-    }
+	}
 
-    @Test
-    @Order(4)
-    public void testDeleteStock() {
-            Stock s = new Stock("stock test",10,100);
-            Stock savedStock= stockService.addStock(s);
-            stockService.deleteStock(savedStock.getIdStock());
-            log.info("stock deleted");
-            assertNull(stockService.retrieveStock(savedStock.getIdStock()));
-    }
+	@Test
+	@Order(4)
+	public void testDeleteStock() {
+		Stock s = new Stock("stock test", 10, 100);
+		Stock savedStock = stockService.addStock(s);
+		stockService.deleteStock(savedStock.getIdStock());
+		log.info("stock deleted");
+		assertNull(stockService.retrieveStock(savedStock.getIdStock()));
+	}
 
 }
