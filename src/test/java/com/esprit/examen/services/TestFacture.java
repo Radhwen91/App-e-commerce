@@ -3,7 +3,7 @@ package com.esprit.examen.services;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-//webhhok
+
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,7 +20,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
@@ -51,6 +50,10 @@ ModelMapper modelMapper = new ModelMapper() ;
 FactureConverter factureConverter = new FactureConverter();
 List<DetailFacture> listDetail = new ArrayList<DetailFacture>();
 List<Reglement> listReglement = new ArrayList<Reglement>();
+
+/**
+ * Method under test: {@link FactureServiceImpl#retrieveAllFactures()}
+ */
 @Test
  void getAllFacture() throws ParseException {	
 	List<Facture> listFacture = new ArrayList<Facture>();
@@ -66,7 +69,9 @@ List<Reglement> listReglement = new ArrayList<Reglement>();
 	log.info("retrieve All done ///////////////// ");
 }
 	
-@SuppressWarnings("deprecation")
+/**
+ * Method under test: {@link FactureServiceImpl#AddFacture()}
+ */
 @Test
  void AddFacture() throws ParseException {
 	
@@ -86,7 +91,9 @@ List<Reglement> listReglement = new ArrayList<Reglement>();
 
 }
 
-
+/**
+ * Method under test: {@link FactureServiceImpl#deleteFacture()}
+ */
 @Test
 	 void testDelete() throws ParseException {
 	
