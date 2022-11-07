@@ -29,22 +29,22 @@ public class FactureDTO {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idFacture;
+	private Long idFacturee;
 	
-	private float montantRemise;
+	private float montantRemisee;
 	
-	private float montantFacture;
-	
-	
-	@Temporal(TemporalType.DATE)
-	private Date dateCreationFacture;
+	private float montantFacturee;
 	
 	
 	@Temporal(TemporalType.DATE)
-	private Date dateDerniereModificationFacture;
+	private Date dateCreationFacturee;
 	
 	
-	private Boolean archivee;
+	@Temporal(TemporalType.DATE)
+	private Date dateDerniereModificationFacturee;
+	
+	
+	private Boolean archiveee;
 
 
     
