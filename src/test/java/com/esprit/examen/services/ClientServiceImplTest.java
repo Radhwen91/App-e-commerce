@@ -1,4 +1,4 @@
-/*package com.esprit.examen.services;
+package com.esprit.examen.services;
 
 import static org.junit.Assert.*;
 
@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@TestMethodOrder(OrderAnnotation.class)
 @Slf4j
 public class ClientServiceImplTest {
 	@Autowired
@@ -33,10 +36,11 @@ public class ClientServiceImplTest {
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date dateNaissance = dateFormat.parse("30/09/2000");
-		Client c = new Client("Salhi", "Ahmed", dateNaissance, "ahmed.salhi@esprit.tn", "pwd", Profession.Cadre,
-				CategorieClient.Ordinaire);
+		Client c = new Client("Salhi", "Ahmed", dateNaissance, "ahmed.salhi@esprit.tn", "pwd", Profession.CADRE,
+				CategorieClient.ORDINAIRE);
 		Client client = clientService.addClient(c);
-		System.out.print("client "+client);
+		//System.out.print("client "+client);
+		log.info("client"+client);
 		assertNotNull(client.getIdClient());
 		assertNotNull(client.getCategorieClient());
 		assertTrue(client.getNom().length() > 0);
@@ -47,8 +51,8 @@ public class ClientServiceImplTest {
 	public void testDeleteClient() throws ParseException {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date dateNaissance = dateFormat.parse("30/09/2000");
-		Client c = new Client("Salhi", "Ahmed", dateNaissance, "ahmed.salhi@esprit.tn", "pwd", Profession.Cadre,
-				CategorieClient.Ordinaire);
+		Client c = new Client("Salhi", "Ahmed", dateNaissance, "ahmed.salhi@esprit.tn", "pwd", Profession.CADRE,
+				CategorieClient.ORDINAIRE);
 		Client client = clientService.addClient(c);
 		clientService.deleteClient(client.getIdClient());
 		assertNull(clientService.retrieveClient(client.getIdClient()));
@@ -60,11 +64,12 @@ public class ClientServiceImplTest {
 		Date dateNaissance = dateFormat.parse("30/09/2000");
 		List<Client> clients = clientService.retrieveAllClients();
 		int expected = clients.size();
-		Client c = new Client("Salhi", "Ahmed", dateNaissance, "ahmed.salhi@esprit.tn", "pwd", Profession.Cadre,
-				CategorieClient.Ordinaire);
+		Client c = new Client("Salhi", "Ahmed", dateNaissance, "ahmed.salhi@esprit.tn", "pwd", Profession.CADRE,
+				CategorieClient.ORDINAIRE);
 		Client client = clientService.addClient(c);
 		assertEquals(expected + 1, clientService.retrieveAllClients().size());
 		clientService.deleteClient(client.getIdClient());
+		log.info("la nouvelle liste clients"+clients);
 
 	}
 	@Test
@@ -73,7 +78,7 @@ public class ClientServiceImplTest {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date startDate = dateFormat.parse("28/09/2000");
 		Date endDate = dateFormat.parse("30/09/2005");
-		List<Client> clients = clientService.getClientsByDateNaissance(startDate, endDate);
+		List<Client> clients = clientService.getClientByDateNaissance(startDate, endDate);
 		log.info(" count" + clients.size());
 		for (Client client : clients) {
 			log.info(" client : " + client.getNom()+ " né le "+client.getDateNaissance());
@@ -82,4 +87,3 @@ public class ClientServiceImplTest {
 	}
 
 }
-*/

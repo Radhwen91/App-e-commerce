@@ -93,5 +93,9 @@ public class ProduitServiceImplTest {
 		stockService.deleteStock(savedStock.getIdStock());
 		produitService.deleteProduit(produit.getIdProduit());
 	}
+<<<<<<< HEAD
 }
 */
+=======
+}*/
+>>>>>>> 5287f7ade4ccb649764e8104beea076c2308ce9b
