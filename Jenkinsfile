@@ -89,11 +89,11 @@ stage('Building our image') {
             }
         }
  	
- 	stage('Start container') { 
+ 	/*stage('Start container') { 
             steps { 
                 sh "docker-compose up" 
             }
-        }
+        }*/
 
          stage('Cleaning up') { 
             steps { 
