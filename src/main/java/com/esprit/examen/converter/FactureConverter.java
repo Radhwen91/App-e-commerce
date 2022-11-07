@@ -2,11 +2,11 @@ package com.esprit.examen.converter;
 
 
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Component;
+
 
 import com.esprit.examen.entities.Facture;
 
-@Component
+
 public class FactureConverter {
 	  public FactureDTO convertEntityToDto(Facture facutre) {
 	        ModelMapper modelMapper = new ModelMapper();
