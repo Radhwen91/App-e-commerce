@@ -89,11 +89,18 @@ stage('Building our image') {
             }
         }
  	
- 	/*stage('Start container') { 
+ 	stage('Start container') { 
             steps { 
-                sh "docker-compose up" 
+                sh "docker-compose up -d" 
             }
-        }*/
+        }
+        
+        
+        stage('stop container') { 
+            steps { 
+                sh "docker-compose down" 
+            }
+        }
 
          stage('Cleaning up') { 
             steps { 
