@@ -2,7 +2,8 @@ package com.esprit.examen.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -36,13 +37,13 @@ public class Facture implements Serializable {
 	private Date dateDerniereModificationFacture;
 	private Boolean archivee;
 	@OneToMany(mappedBy = "facture")
-	private Set<DetailFacture> detailsFacture;
+	private List<DetailFacture> detailsFacture;
     @ManyToOne
     @JsonIgnore
     private Fournisseur fournisseur;
     @OneToMany(mappedBy="facture")
     @JsonIgnore
-    private Set<Reglement> reglements;
+    private List<Reglement> reglements;
 
 	
 }

@@ -27,6 +27,7 @@ import com.esprit.examen.converter.FactureConverter;
 import com.esprit.examen.converter.FactureDTO;
 import com.esprit.examen.entities.DetailFacture;
 import com.esprit.examen.entities.Facture;
+import com.esprit.examen.entities.Fournisseur;
 import com.esprit.examen.entities.Reglement;
 import com.esprit.examen.repositories.FactureRepository;
 
@@ -50,7 +51,7 @@ ModelMapper modelMapper = new ModelMapper() ;
 FactureConverter factureConverter = new FactureConverter();
 List<DetailFacture> listDetail = new ArrayList<DetailFacture>();
 List<Reglement> listReglement = new ArrayList<Reglement>();
-
+Fournisseur fourn = new Fournisseur();
 /**
  * Method under test: {@link FactureServiceImpl#retrieveAllFactures()}
  */
@@ -59,8 +60,8 @@ List<Reglement> listReglement = new ArrayList<Reglement>();
 	List<Facture> listFacture = new ArrayList<Facture>();
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	Date dateCreationFacture = dateFormat.parse("30/09/2000");	
-	listFacture.add(new Facture(null, 23,21,dateCreationFacture,dateCreationFacture,true,null,null,null));
-	listFacture.add(new Facture(null,30,44,dateCreationFacture,dateCreationFacture,true,null,null,null));
+	listFacture.add(new Facture(1L, 23,21,dateCreationFacture,dateCreationFacture,true,listDetail,fourn,listReglement));
+	listFacture.add(new Facture(1L,30,44,dateCreationFacture,dateCreationFacture,true,listDetail,fourn,listReglement));
 
 	Mockito.when(factureService.retrieveAllFactures()).thenReturn(listFacture);
 	List<Facture> empList = factureService.retrieveAllFactures();
@@ -78,7 +79,7 @@ List<Reglement> listReglement = new ArrayList<Reglement>();
 	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	Date dateCreationFacture = dateFormat.parse("30/09/2000");
-	Facture f =new Facture(null, 23,21,dateCreationFacture,dateCreationFacture,true,null,null,null);
+	Facture f =new Facture(1L, 23,21,dateCreationFacture,dateCreationFacture,true,listDetail,fourn,listReglement);
 
 	FactureDTO factureDTO =factureConverter.convertEntityToDto(f);
 
@@ -99,7 +100,7 @@ List<Reglement> listReglement = new ArrayList<Reglement>();
 	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	Date dateCreationFacture = dateFormat.parse("30/09/2000");
-	Facture f =new Facture(null, 23,21,dateCreationFacture,dateCreationFacture,true,null,null,null);
+	Facture f =new Facture(1L, 23,21,dateCreationFacture,dateCreationFacture,true,listDetail,fourn,listReglement);
 
 Mockito.when(factureRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(f));
 if(factureService.retrieveFacture(1L) == null) {
