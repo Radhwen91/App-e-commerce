@@ -1,0 +1,20 @@
+-------------------------------------------------------------------------------
+Test set: com.esprit.examen.services.ProduitServiceImplTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 9.047 sec <<< FAILURE!
+testUpdateProduit(com.esprit.examen.services.ProduitServiceImplTest)  Time elapsed: 0.034 sec  <<< FAILURE!
+java.lang.AssertionError: expected same:<1/10/2022> was not:<Sat Oct 01 00:00:00 WAT 2022>
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.failNotSame(Assert.java:829)
+	at org.junit.Assert.assertSame(Assert.java:772)
+	at org.junit.Assert.assertSame(Assert.java:783)
+	at com.esprit.examen.services.ProduitServiceImplTest.testUpdateProduit(ProduitServiceImplTest.java:81)
+
+testAssignProduitToStock(com.esprit.examen.services.ProduitServiceImplTest)  Time elapsed: 0.038 sec  <<< FAILURE!
+java.lang.AssertionError: null
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertNotNull(Assert.java:713)
+	at org.junit.Assert.assertNotNull(Assert.java:723)
+	at com.esprit.examen.services.ProduitServiceImplTest.testAssignProduitToStock(ProduitServiceImplTest.java:96)
+
