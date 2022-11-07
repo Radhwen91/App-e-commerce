@@ -43,7 +43,7 @@ public class StockServiceImplTest {
 	@Order(3)
 	public void testRetrieveAllStocks() {
 		List<Stock> stocks = stockService.retrieveAllStocks();
-		Assertions.assertEquals(4, stocks.size());
+		Assertions.assertEquals(5, stocks.size());
 
 	}
 
