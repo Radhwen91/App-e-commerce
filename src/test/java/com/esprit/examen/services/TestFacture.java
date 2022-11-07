@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -19,9 +20,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 
+import com.esprit.examen.converter.FactureConverter;
+import com.esprit.examen.converter.FactureDTO;
 import com.esprit.examen.entities.DetailFacture;
 import com.esprit.examen.entities.Facture;
 import com.esprit.examen.entities.Fournisseur;
@@ -44,11 +47,14 @@ FactureServiceImpl factureService;
 @Mock
 FactureRepository factureRepository; 
 
+ModelMapper modelMapper = new ModelMapper() ;
+FactureConverter factureConverter = new FactureConverter();
 List<DetailFacture> listDetail = new ArrayList<DetailFacture>();
 List<Reglement> listReglement = new ArrayList<Reglement>();
 Fournisseur fourn = new Fournisseur();
-
-
+/**
+ * Method under test: {@link FactureServiceImpl#retrieveAllFactures()}
+ */
 @Test
  void getAllFacture() throws ParseException {	
 	List<Facture> listFacture = new ArrayList<Facture>();
@@ -64,7 +70,9 @@ Fournisseur fourn = new Fournisseur();
 	log.info("retrieve All done ///////////////// ");
 }
 	
-
+/**
+ * Method under test: {@link FactureServiceImpl#AddFacture()}
+ */
 @Test
  void AddFacture() throws ParseException {
 	
@@ -73,14 +81,13 @@ Fournisseur fourn = new Fournisseur();
 	Date dateCreationFacture = dateFormat.parse("30/09/2000");
 	Facture f =new Facture(1L, 23,21,dateCreationFacture,dateCreationFacture,true,listDetail,fourn,listReglement);
 
-	//FactureDTO factureDTO =factureConverter.convertEntityToDto(f);
+	FactureDTO factureDTO =factureConverter.convertEntityToDto(f);
 
 	
-	MockitoAnnotations.initMocks(this);	
-	factureService.addFacture(f);
-
-    verify(factureRepository, times(1)).save(f);
-    log.info("retrieve All done ///////////////// ");
+	FactureDTO produitAdded = factureService.addFacture(factureDTO);
+      verify(factureRepository, Mockito.times(1)).save(Mockito.isA(Facture.class));
+      Mockito.verifyNoMoreInteractions(factureRepository);
+      Assertions.assertNotNull(produitAdded);
 	
 
 }

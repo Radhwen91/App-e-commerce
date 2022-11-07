@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.esprit.examen.converter.FactureDTO;
 import com.esprit.examen.entities.Facture;
 import com.esprit.examen.services.IFactureService;
 
@@ -38,7 +39,7 @@ public class FactureRestController {
    
     @PostMapping("/add-facture")
     @ResponseBody
-    public Facture addFacture(@RequestBody Facture f) {
+    public FactureDTO addFacture(@RequestBody FactureDTO f) {
          return  factureService.addFacture(f);
          
     }
