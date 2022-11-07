@@ -44,18 +44,10 @@ public class FactureRestController {
     }
 
 
-    @PutMapping("/cancel-facture/{facture-id}")
-    @ResponseBody
-    public void cancelFacture(@PathVariable("facture-id") Long factureId) {
-        factureService.cancelFacture(factureId);
-    }
+
 
     
-    @GetMapping("/getFactureByFournisseur/{fournisseur-id}")
-    @ResponseBody
-    public List<Facture> getFactureByFournisseur(@PathVariable("fournisseur-id") Long fournisseurId) {
-        return factureService.getFacturesByFournisseur(fournisseurId);
-    }
+  
 
 
    
