@@ -1,20 +1,19 @@
 package com.esprit.examen.services;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import javax.transaction.Transactional;
 
-
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.esprit.examen.converter.FactureConverter;
+import com.esprit.examen.converter.FactureDTO;
 import com.esprit.examen.entities.DetailFacture;
 import com.esprit.examen.entities.Facture;
 
 import com.esprit.examen.entities.Fournisseur;
-import com.esprit.examen.entities.Operateur;
 import com.esprit.examen.entities.Produit;
 import com.esprit.examen.repositories.DetailFactureRepository;
 import com.esprit.examen.repositories.FactureRepository;
@@ -41,12 +40,11 @@ public class FactureServiceImpl implements IFactureService {
     @Autowired
     ReglementServiceImpl reglementService;
    
-    /*@Autowired
-    FactureConverter factureConverter;
    
-    @Autowired
-    ModelMapper modelMapper;
-    */
+    FactureConverter factureConverter = new FactureConverter();
+   
+    ModelMapper modelMapper = new ModelMapper();
+    
     
 	@Override
 	public List<Facture> retrieveAllFactures() {
@@ -58,8 +56,15 @@ public class FactureServiceImpl implements IFactureService {
 	}
 
 	
-	public Facture addFacture(Facture f) {
-		return factureRepository.save(f);
+	public FactureDTO addFacture(FactureDTO f) {
+		
+		
+		Facture facture = factureConverter.convertDtoToEntity(f);
+		
+		factureRepository.save(facture);
+		
+		return factureConverter.convertEntityToDto(facture);
+		
 	}
 	
 	public Facture addDetailsFacture(Facture f, Set<DetailFacture> detailsFacture) {
@@ -110,21 +115,7 @@ public class FactureServiceImpl implements IFactureService {
 		return (List<Facture>) fournisseur.getFactures();
 	}
 
-	@Override
-	public void assignOperateurToFacture(Long idOperateur, Long idFacture) {
-		Facture facture = factureRepository.findById(idFacture).orElse(null);
-		Operateur operateur = operateurRepository.findById(idOperateur).orElse(new Operateur());
-		operateur.getFactures().add(facture);
-		operateurRepository.save(operateur);
-	}
 
-	@Override
-	public float pourcentageRecouvrement(Date startDate, Date endDate) {
-		float totalFacturesEntreDeuxDates = factureRepository.getTotalFacturesEntreDeuxDates(startDate,endDate);
-		float totalRecouvrementEntreDeuxDates =reglementService.getChiffreAffaireEntreDeuxDate(startDate,endDate);
-		return (totalRecouvrementEntreDeuxDates/totalFacturesEntreDeuxDates)*100;
-	
-	}
 	
 	public void deleteFacture(Long factureId) {
 		
@@ -133,6 +124,12 @@ public class FactureServiceImpl implements IFactureService {
 		
 		
 	}
+
+
+
+
+
+	
 	
 
 }

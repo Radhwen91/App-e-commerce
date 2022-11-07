@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -21,7 +22,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 
+import com.esprit.examen.converter.FactureConverter;
+import com.esprit.examen.converter.FactureDTO;
 import com.esprit.examen.entities.DetailFacture;
 import com.esprit.examen.entities.Facture;
 import com.esprit.examen.entities.Reglement;
@@ -43,6 +47,8 @@ FactureServiceImpl factureService;
 @Mock
 FactureRepository factureRepository; 
 
+ModelMapper modelMapper = new ModelMapper() ;
+FactureConverter factureConverter = new FactureConverter();
 List<DetailFacture> listDetail = new ArrayList<DetailFacture>();
 List<Reglement> listReglement = new ArrayList<Reglement>();
 @Test
@@ -57,20 +63,27 @@ List<Reglement> listReglement = new ArrayList<Reglement>();
 	List<Facture> empList = factureService.retrieveAllFactures();
 	assertEquals(2, empList.size());
 	verify(factureRepository, times(1)).findAll();
-	 log.info("Add done ///////////////// ");
+	log.info("retrieve All done ///////////////// ");
 }
 	
 @SuppressWarnings("deprecation")
 @Test
  void AddFacture() throws ParseException {
+	
+	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	Date dateCreationFacture = dateFormat.parse("30/09/2000");
 	Facture f =new Facture(null, 23,21,dateCreationFacture,dateCreationFacture,true,null,null,null);
-	MockitoAnnotations.initMocks(this);	
-	factureService.addFacture(f);
-    
-    verify(factureRepository, times(1)).save(f);
-    log.info("retrieve All done ///////////////// ");
+
+	FactureDTO factureDTO =factureConverter.convertEntityToDto(f);
+
+	
+	FactureDTO produitAdded = factureService.addFacture(factureDTO);
+      verify(factureRepository, Mockito.times(1)).save(Mockito.isA(Facture.class));
+      Mockito.verifyNoMoreInteractions(factureRepository);
+      Assertions.assertNotNull(produitAdded);
+	
+
 }
 
 

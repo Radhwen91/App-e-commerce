@@ -1,11 +1,11 @@
 package com.esprit.examen.controllers;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
+
+import com.esprit.examen.converter.FactureDTO;
 import com.esprit.examen.entities.Facture;
 import com.esprit.examen.services.IFactureService;
 
@@ -39,7 +39,7 @@ public class FactureRestController {
    
     @PostMapping("/add-facture")
     @ResponseBody
-    public Facture addFacture(@RequestBody Facture f) {
+    public FactureDTO addFacture(@RequestBody FactureDTO f) {
          return  factureService.addFacture(f);
          
     }
@@ -59,21 +59,8 @@ public class FactureRestController {
     }
 
 
-    @PutMapping(value = "/assignOperateurToFacture/{idOperateur}/{idFacture}")
-    public void assignOperateurToFacture(@PathVariable("idOperateur") Long idOperateur, @PathVariable("idFacture") Long idFacture) {
-        factureService.assignOperateurToFacture(idOperateur, idFacture);
-    }
+   
 
-
-    @GetMapping(value = "/pourcentageRecouvrement/{startDate}/{endDate}")
-    public float pourcentageRecouvrement(
-            @PathVariable(name = "startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
-            @PathVariable(name = "endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
-        try {
-            return factureService.pourcentageRecouvrement(startDate, endDate);
-        } catch (Exception e) {
-            return 0;
-        }
-    }
+  
 
 }
