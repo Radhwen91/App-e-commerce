@@ -140,6 +140,9 @@ import lombok.extern.slf4j.Slf4j;
         verify(stockrepository, Mockito.times(1)).save(s);
 		log.info("+++++++++++++++++++++++++testAssignProduitToStock is works++++++++++++++++++++++++ ");
 	}*/
+	 
+	 
+	 
 	
 	
 	
